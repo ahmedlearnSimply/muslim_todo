@@ -1,11 +1,15 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
 
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 
 class CustomDatePicker extends StatefulWidget {
-  const CustomDatePicker({super.key});
+  CustomDatePicker({
+    super.key,
+    required this.onDateSelected,
+  });
+  final Function(DateTime) onDateSelected; // Callback function
 
   @override
   State<CustomDatePicker> createState() => _CustomDatePickerState();
@@ -39,7 +43,9 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
             selectedTextColor: Colors.white,
             onDateChange: (date) {
               // New date selected
-              setState(() {});
+              setState(() {
+                widget.onDateSelected(date);
+              });
             },
           ),
         ),

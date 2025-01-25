@@ -13,6 +13,38 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  DateTime _selectedDate = DateTime.now(); // Store the selected date
+
+  String _formatDate(DateTime date) {
+    final dayName = _getDayName(date.weekday); // Get day name (e.g., Saturday)
+    final day = date.day;
+    final month = date.month;
+    final year = date.year;
+    return '$dayName, $day-$month-$year';
+  }
+
+  // Function to get the day name
+  String _getDayName(int weekday) {
+    switch (weekday) {
+      case 1:
+        return 'الإثنين';
+      case 2:
+        return 'الثلاثاء';
+      case 3:
+        return 'الأربعاء';
+      case 4:
+        return 'الخميس';
+      case 5:
+        return 'الجمعة';
+      case 6:
+        return 'السبت';
+      case 7:
+        return 'الأحد';
+      default:
+        return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -23,7 +55,7 @@ class _HomePageState extends State<HomePage> {
           title: Column(
             children: [
               Text(
-                'يوم السبت',
+                _getDayName(_selectedDate.weekday),
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'cairo',
@@ -31,7 +63,7 @@ class _HomePageState extends State<HomePage> {
               ),
               Gap(5),
               Text(
-                '25-1-2025',
+                '${_selectedDate.day}-${_selectedDate.month}-${_selectedDate.year}',
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: 'cairo',
@@ -45,7 +77,14 @@ class _HomePageState extends State<HomePage> {
         body: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            CustomDatePicker(),
+            CustomDatePicker(
+              onDateSelected: (date) {
+                // Update the selected date
+                setState(() {
+                  _selectedDate = date;
+                });
+              },
+            ),
             Text("daf"),
           ],
         ),
