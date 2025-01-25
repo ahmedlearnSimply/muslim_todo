@@ -51,6 +51,26 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         backgroundColor: AppColor.background,
         appBar: AppBar(
+          actions: [
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: Container(
+                decoration: BoxDecoration(
+                    color: AppColor.blue,
+                    borderRadius: BorderRadius.circular(
+                      30,
+                    )),
+                child: IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    color: Colors.white,
+                    Icons.add,
+                    size: 30,
+                  ),
+                ),
+              ),
+            )
+          ],
           toolbarHeight: 80,
           title: Column(
             children: [
