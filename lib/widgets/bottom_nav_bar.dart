@@ -40,13 +40,6 @@ class _NavBarWidgetState extends State<NavBarWidget> {
               height: 80,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.white,
-                    blurRadius: 10,
-                    spreadRadius: 2,
-                  ),
-                ],
               ),
               child: ClipRRect(
                 child: BottomNavigationBar(
