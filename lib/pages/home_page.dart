@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
+import 'package:muslim_todp/widgets/date_picker.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -21,17 +23,31 @@ class _HomePageState extends State<HomePage> {
           title: Column(
             children: [
               Text(
-                '31 December',
-                style: TextStyle(color: Colors.white),
+                'يوم السبت',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'cairo',
+                ),
               ),
+              Gap(5),
               Text(
-                'Saturday',
-                style: TextStyle(color: Colors.white),
+                '25-1-2025',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: 'cairo',
+                ),
               ),
             ],
           ),
           centerTitle: true,
           backgroundColor: AppColor.primaryColor,
+        ),
+        body: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            CustomDatePicker(),
+            Text("daf"),
+          ],
         ),
       ),
     );
