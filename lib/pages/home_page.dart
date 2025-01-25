@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'package:flutter/material.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 
@@ -14,6 +16,20 @@ class _HomePageState extends State<HomePage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 80,
+          title: Column(
+            children: [
+              Text(
+                'Muslim Todo',
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                'Muslim Todo',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+          centerTitle: true,
           backgroundColor: AppColor.primaryColor,
         ),
       ),
