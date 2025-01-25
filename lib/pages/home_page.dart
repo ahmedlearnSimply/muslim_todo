@@ -21,11 +21,11 @@ class _HomePageState extends State<HomePage> {
           title: Column(
             children: [
               Text(
-                'Muslim Todo',
+                '31 December',
                 style: TextStyle(color: Colors.white),
               ),
               Text(
-                'Muslim Todo',
+                'Saturday',
                 style: TextStyle(color: Colors.white),
               ),
             ],
