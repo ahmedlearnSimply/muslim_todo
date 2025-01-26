@@ -43,35 +43,112 @@ class _HomePageState extends State<HomePage> {
               child: GestureDetector(
                 onTap: () {
                   showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text("Did you pray?"),
-                          content: Text("Have you prayed Dhuhr?"),
-                          actions: [
-                            TextButton(
-                              onPressed: () {
-                                // User selected "No"
-                                setState(() {
-                                  _isPrayed = false; // Update the state
-                                });
-                                Navigator.pop(context); // Close the dialog
-                              },
-                              child: Text("No"),
+                    context: context,
+                    builder: (context) {
+                      return AlertDialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius:
+                              BorderRadius.circular(20), // Rounded corners
+                        ),
+                        backgroundColor: Colors.white, // Background color
+                        elevation: 10, // Add shadow
+                        title: Text(
+                          "هل صليت الفرض اليوم؟",
+                          style: TextStyle(
+                            fontFamily: 'cairo',
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold,
+                            color: AppColor.primaryColor, // Custom title color
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        content: Column(
+                          mainAxisSize:
+                              MainAxisSize.min, // Minimize content height
+                          children: [
+                            Text(
+                              "الضهر",
+                              style: TextStyle(
+                                fontFamily: 'cairoNormal',
+                                fontSize: 24,
+                                color: Colors.black87, // Custom text color
+                              ),
+                              textAlign: TextAlign.center,
                             ),
-                            TextButton(
-                              onPressed: () {
-                                // User selected "Yes"
-                                setState(() {
-                                  _isPrayed = true; // Update the state
-                                });
-                                Navigator.pop(context); // Close the dialog
-                              },
-                              child: Text("Yes"),
+                            SizedBox(height: 10), // Add spacing
+                            Text(
+                              "هل صليت؟",
+                              style: TextStyle(
+                                fontFamily: 'cairoNormal',
+                                fontSize: 20,
+                                color: Colors.black54, // Custom text color
+                              ),
+                              textAlign: TextAlign.center,
                             ),
                           ],
-                        );
-                      });
+                        ),
+                        actions: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              // "No" Button
+                              ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _isPrayed = false; // Update the state
+                                  });
+                                  Navigator.pop(context); // Close the dialog
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.red, // Button color
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        10), // Rounded button
+                                  ),
+                                ),
+                                child: Text(
+                                  "للأسف",
+                                  style: TextStyle(
+                                    fontFamily: 'cairo',
+                                    fontSize: 18,
+                                    color: Colors.white, // Text color
+                                  ),
+                                ),
+                              ),
+                              // "Yes" Button
+                              ElevatedButton(
+                                onPressed: () {
+                                  setState(() {
+                                    _isPrayed = true; // Update the state
+                                  });
+                                  Navigator.pop(context); // Close the dialog
+                                },
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.green, // Button color
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 10),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        10), // Rounded button
+                                  ),
+                                ),
+                                child: Text(
+                                  "نعم",
+                                  style: TextStyle(
+                                    fontFamily: 'cairo',
+                                    fontSize: 18,
+                                    color: Colors.white, // Text color
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      );
+                    },
+                  );
                 },
                 child: Stack(
                   children: [

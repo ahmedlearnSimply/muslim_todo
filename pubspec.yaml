@@ -27,3 +27,6 @@ flutter:
     - family: cairo
       fonts:
         - asset: assets/fonts/Cairo/static/Cairo-Black.ttf
+    - family: cairoNormal
+      fonts:
+        - asset: assets/fonts/Cairo/static/Cairo-Regular.ttf
