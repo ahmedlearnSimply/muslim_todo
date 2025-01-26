@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
+import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 import 'package:muslim_todp/widgets/custom_appbar.dart';
 import 'package:muslim_todp/widgets/date_picker.dart';
@@ -35,7 +37,36 @@ class _HomePageState extends State<HomePage> {
                 });
               },
             ),
-            Text("daf"),
+            Gap(20),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Container(
+                width: double.infinity,
+                height: 70,
+                decoration: BoxDecoration(
+                  color: AppColor.primaryColor,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Row(
+                  children: [
+                    SvgPicture.asset(
+                      AppImages.moon,
+                      colorFilter:
+                          ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                      width: 90,
+                    ),
+                    Text(
+                      "الضهر",
+                      style: TextStyle(
+                        fontFamily: 'cairo',
+                        color: Colors.white,
+                        fontSize: 24,
+                      ),
+                    )
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
