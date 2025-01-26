@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   DateTime _selectedDate = DateTime.now(); // Store the selected date
-
+  bool _isPrayed = false;
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -40,59 +40,97 @@ class _HomePageState extends State<HomePage> {
             Gap(20),
             Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Stack(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    height: 70,
-                    decoration: BoxDecoration(
-                      color: AppColor.primaryColor,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Row(
-                      children: [
-                        SvgPicture.asset(
-                          AppImages.moon,
-                          colorFilter:
-                              ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                          width: 90,
-                        ),
-                        Gap(10),
-                        Text(
-                          "الضهر",
-                          style: TextStyle(
-                            fontFamily: 'cairo',
-                            color: Colors.white,
-                            fontSize: 24,
+              child: GestureDetector(
+                onTap: () {
+                  showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: Text("Did you pray?"),
+                          content: Text("Have you prayed Dhuhr?"),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                // User selected "No"
+                                setState(() {
+                                  _isPrayed = false; // Update the state
+                                });
+                                Navigator.pop(context); // Close the dialog
+                              },
+                              child: Text("No"),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                // User selected "Yes"
+                                setState(() {
+                                  _isPrayed = true; // Update the state
+                                });
+                                Navigator.pop(context); // Close the dialog
+                              },
+                              child: Text("Yes"),
+                            ),
+                          ],
+                        );
+                      });
+                },
+                child: Stack(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: 70,
+                      decoration: BoxDecoration(
+                        color: AppColor.primaryColor,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Row(
+                        children: [
+                          SvgPicture.asset(
+                            AppImages.moon,
+                            colorFilter:
+                                ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                            width: 90,
                           ),
-                        )
+                          Gap(10),
+                          Text(
+                            "الضهر",
+                            style: TextStyle(
+                              fontFamily: 'cairo',
+                              color: Colors.white,
+                              fontSize: 24,
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        Container(
+                          width: 100,
+                          height: 70,
+                          decoration: BoxDecoration(
+                            color: AppColor.secondary,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(0),
+                              topRight: Radius.circular(15),
+                              bottomLeft: Radius.circular(0),
+                              bottomRight: Radius.circular(15),
+                            ),
+                          ),
+                          child: Icon(
+                            _isPrayed
+                                ? Icons.gpp_good
+                                : Icons.gpp_bad, // Dynamic icon
+                            color: _isPrayed
+                                ? Colors.green
+                                : Colors.red, // Dynamic color
+                            size: 60,
+                          ),
+                        ),
                       ],
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        width: 100,
-                        height: 70,
-                        decoration: BoxDecoration(
-                          color: AppColor.secondary,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(0),
-                            topRight: Radius.circular(15),
-                            bottomLeft: Radius.circular(0),
-                            bottomRight: Radius.circular(15),
-                          ),
-                        ),
-                        child: Icon(
-                          Icons.gpp_good,
-                          color: Colors.green,
-                          size: 60,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
