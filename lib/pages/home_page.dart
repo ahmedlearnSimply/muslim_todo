@@ -34,74 +34,76 @@ class _HomePageState extends State<HomePage> {
         appBar: CustomAppBar(
           selectedDate: _selectedDate,
         ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            CustomDatePicker(
-              onDateSelected: (date) {
-                // Update the selected date
-                setState(() {
-                  _selectedDate = date;
-                });
-              },
-            ),
-            Gap(20),
-            PrayerCard(
-              prayerName: "الفجر",
-              image: AppImages.moon,
-              isPrayed: _prayerStatus['الفجر'] ?? false,
-              onPrayerStatusChanged: (newStatus) {
-                setState(() {
-                  _prayerStatus['الفجر'] = newStatus;
-                });
-              },
-              parentContext: context,
-            ),
-            PrayerCard(
-              prayerName: "الضهر",
-              image: AppImages.duhar,
-              isPrayed: _prayerStatus['الضهر'] ?? false,
-              onPrayerStatusChanged: (newStatus) {
-                setState(() {
-                  _prayerStatus['الضهر'] = newStatus;
-                });
-              },
-              parentContext: context,
-            ),
-            PrayerCard(
-              prayerName: "العصر",
-              image: AppImages.asar,
-              isPrayed: _prayerStatus['العصر'] ?? false,
-              onPrayerStatusChanged: (newStatus) {
-                setState(() {
-                  _prayerStatus['العصر'] = newStatus;
-                });
-              },
-              parentContext: context,
-            ),
-            PrayerCard(
-              prayerName: "المغرب",
-              image: AppImages.magharib,
-              isPrayed: _prayerStatus['المغرب'] ?? false,
-              onPrayerStatusChanged: (newStatus) {
-                setState(() {
-                  _prayerStatus['المغرب'] = newStatus;
-                });
-              },
-              parentContext: context,
-            ),
-            PrayerCard(
-              prayerName: "العشا",
-              image: AppImages.isha,
-              isPrayed: _prayerStatus['العشا'] ?? false,
-              onPrayerStatusChanged: (newStatus) {
-                setState(() {
-                  _prayerStatus['العشا'] = newStatus;
-                });
-              },
-              parentContext: context,
-            ),
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              CustomDatePicker(
+                onDateSelected: (date) {
+                  // Update the selected date
+                  setState(() {
+                    _selectedDate = date;
+                  });
+                },
+              ),
+              Gap(20),
+              PrayerCard(
+                prayerName: "الفجر",
+                image: AppImages.moon,
+                isPrayed: _prayerStatus['الفجر'] ?? false,
+                onPrayerStatusChanged: (newStatus) {
+                  setState(() {
+                    _prayerStatus['الفجر'] = newStatus;
+                  });
+                },
+                parentContext: context,
+              ),
+              PrayerCard(
+                prayerName: "الضهر",
+                image: AppImages.duhar,
+                isPrayed: _prayerStatus['الضهر'] ?? false,
+                onPrayerStatusChanged: (newStatus) {
+                  setState(() {
+                    _prayerStatus['الضهر'] = newStatus;
+                  });
+                },
+                parentContext: context,
+              ),
+              PrayerCard(
+                prayerName: "العصر",
+                image: AppImages.asar,
+                isPrayed: _prayerStatus['العصر'] ?? false,
+                onPrayerStatusChanged: (newStatus) {
+                  setState(() {
+                    _prayerStatus['العصر'] = newStatus;
+                  });
+                },
+                parentContext: context,
+              ),
+              PrayerCard(
+                prayerName: "المغرب",
+                image: AppImages.magharib,
+                isPrayed: _prayerStatus['المغرب'] ?? false,
+                onPrayerStatusChanged: (newStatus) {
+                  setState(() {
+                    _prayerStatus['المغرب'] = newStatus;
+                  });
+                },
+                parentContext: context,
+              ),
+              PrayerCard(
+                prayerName: "العشا",
+                image: AppImages.isha,
+                isPrayed: _prayerStatus['العشا'] ?? false,
+                onPrayerStatusChanged: (newStatus) {
+                  setState(() {
+                    _prayerStatus['العشا'] = newStatus;
+                  });
+                },
+                parentContext: context,
+              ),
+            ],
+          ),
         ),
       ),
     );
