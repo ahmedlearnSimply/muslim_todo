@@ -40,31 +40,59 @@ class _HomePageState extends State<HomePage> {
             Gap(20),
             Padding(
               padding: const EdgeInsets.all(12.0),
-              child: Container(
-                width: double.infinity,
-                height: 70,
-                decoration: BoxDecoration(
-                  color: AppColor.primaryColor,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: Row(
-                  children: [
-                    SvgPicture.asset(
-                      AppImages.moon,
-                      colorFilter:
-                          ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                      width: 90,
+              child: Stack(
+                children: [
+                  Container(
+                    width: double.infinity,
+                    height: 70,
+                    decoration: BoxDecoration(
+                      color: AppColor.primaryColor,
+                      borderRadius: BorderRadius.circular(15),
                     ),
-                    Text(
-                      "الضهر",
-                      style: TextStyle(
-                        fontFamily: 'cairo',
-                        color: Colors.white,
-                        fontSize: 24,
+                    child: Row(
+                      children: [
+                        SvgPicture.asset(
+                          AppImages.moon,
+                          colorFilter:
+                              ColorFilter.mode(Colors.white, BlendMode.srcIn),
+                          width: 90,
+                        ),
+                        Gap(10),
+                        Text(
+                          "الضهر",
+                          style: TextStyle(
+                            fontFamily: 'cairo',
+                            color: Colors.white,
+                            fontSize: 24,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        width: 100,
+                        height: 70,
+                        decoration: BoxDecoration(
+                          color: AppColor.secondary,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(0),
+                            topRight: Radius.circular(15),
+                            bottomLeft: Radius.circular(0),
+                            bottomRight: Radius.circular(15),
+                          ),
+                        ),
+                        child: Icon(
+                          Icons.gpp_good,
+                          color: Colors.green,
+                          size: 60,
+                        ),
                       ),
-                    )
-                  ],
-                ),
+                    ],
+                  ),
+                ],
               ),
             ),
           ],
