@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_final_fields
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -18,7 +18,14 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
-  DateTime _selectedDate = DateTime.now(); // Store the selected date
+  DateTime _selectedDate = DateTime.now();
+  Map<String, bool> _prayerStatus = {
+    "الفجر": false,
+    "الضهر": false,
+    "العصر": false,
+    "المغرب": false,
+    "العشا": false,
+  }; // Store the selected date
   bool _isPrayed = false;
   Widget build(BuildContext context) {
     return SafeArea(
@@ -41,20 +48,55 @@ class _HomePageState extends State<HomePage> {
             Gap(20),
             PrayerCard(
               prayerName: "الفجر",
-              isPrayed: _isPrayed,
+              image: AppImages.moon,
+              isPrayed: _prayerStatus['الفجر'] ?? false,
               onPrayerStatusChanged: (newStatus) {
                 setState(() {
-                  _isPrayed = newStatus;
+                  _prayerStatus['الفجر'] = newStatus;
                 });
               },
               parentContext: context,
             ),
             PrayerCard(
-              prayerName: "الفجر",
-              isPrayed: _isPrayed,
+              prayerName: "الضهر",
+              image: AppImages.duhar,
+              isPrayed: _prayerStatus['الضهر'] ?? false,
               onPrayerStatusChanged: (newStatus) {
                 setState(() {
-                  _isPrayed = newStatus;
+                  _prayerStatus['الضهر'] = newStatus;
+                });
+              },
+              parentContext: context,
+            ),
+            PrayerCard(
+              prayerName: "العصر",
+              image: AppImages.asar,
+              isPrayed: _prayerStatus['العصر'] ?? false,
+              onPrayerStatusChanged: (newStatus) {
+                setState(() {
+                  _prayerStatus['العصر'] = newStatus;
+                });
+              },
+              parentContext: context,
+            ),
+            PrayerCard(
+              prayerName: "المغرب",
+              image: AppImages.magharib,
+              isPrayed: _prayerStatus['المغرب'] ?? false,
+              onPrayerStatusChanged: (newStatus) {
+                setState(() {
+                  _prayerStatus['المغرب'] = newStatus;
+                });
+              },
+              parentContext: context,
+            ),
+            PrayerCard(
+              prayerName: "العشا",
+              image: AppImages.isha,
+              isPrayed: _prayerStatus['العشا'] ?? false,
+              onPrayerStatusChanged: (newStatus) {
+                setState(() {
+                  _prayerStatus['العشا'] = newStatus;
                 });
               },
               parentContext: context,

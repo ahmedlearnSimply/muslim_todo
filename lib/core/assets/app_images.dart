@@ -6,6 +6,6 @@ class AppImages {
   static String moon = "assets/icons/moon.svg";
   static String duhar = "assets/icons/sun.svg";
   static String asar = "assets/icons/asar.svg";
-  static String magharib = "aassets/icons/mag.svg";
+  static String magharib = "assets/icons/mag.svg";
   static String isha = "assets/icons/isha.svg";
 }

@@ -7,6 +7,7 @@ import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 
 class PrayerCard extends StatelessWidget {
+  final String image;
   final String prayerName;
   final bool isPrayed;
   final Function(bool) onPrayerStatusChanged;
@@ -14,6 +15,7 @@ class PrayerCard extends StatelessWidget {
 
   const PrayerCard({
     super.key,
+    required this.image,
     required this.prayerName,
     required this.isPrayed,
     required this.onPrayerStatusChanged,
@@ -138,13 +140,14 @@ class PrayerCard extends StatelessWidget {
               ),
               child: Row(
                 children: [
+                  Gap(10),
                   SvgPicture.asset(
-                    AppImages.moon,
+                    image,
                     colorFilter:
                         ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                    width: 90,
+                    width: 60,
                   ),
-                  Gap(10),
+                  Gap(20),
                   Text(
                     prayerName, // Use the provided prayer name
                     style: TextStyle(
