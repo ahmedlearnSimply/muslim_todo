@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _loadPrayerStatus(); // Load prayer status when the app starts
+    // _loadPrayerStatus(); // Load prayer status when the app starts
   }
 
   DateTime _selectedDate = DateTime.now();
@@ -30,37 +30,37 @@ class _HomePageState extends State<HomePage> {
     "العشا": false,
   };
 
-  void _updatePrayerStatus(
-      String prayerName, bool status, DateTime selectedDate) {
-    setState(() {
-      _prayerStatus[prayerName] = status;
-    });
-    // Save to Hive
-    final prayerBox = Hive.box('prayerBox');
-    prayerBox.put(
-      prayerName,
-      status,
-    );
-  }
+  // void _updatePrayerStatus(
+  //     String prayerName, bool status, DateTime selectedDate) {
+  //   setState(() {
+  //     _prayerStatus[prayerName] = status;
+  //   });
+  //   // Save to Hive
+  //   final prayerBox = Hive.box('prayerBox');
+  //   prayerBox.put(
+  //     prayerName,
+  //     status,
+  //   );
+  // }
 
-  void _loadPrayerStatus() {
-    final prayerBox = Hive.box('prayerBox');
-    setState(() {
-      _prayerStatus = {
-        "الفجر": prayerBox.get(
-          'الفجر',
-          defaultValue: false,
-        ),
-        "الضهر": prayerBox.get('${_selectedDate}الضهر', defaultValue: false),
-        "العصر": prayerBox.get('${_selectedDate.toIso8601String()}_العصر',
-            defaultValue: false),
-        "المغرب": prayerBox.get('${_selectedDate.toIso8601String()}_المغرب',
-            defaultValue: false),
-        "العشا": prayerBox.get('${_selectedDate.toIso8601String()}_العشا',
-            defaultValue: false),
-      };
-    });
-  }
+  // void _loadPrayerStatus() {
+  //   final prayerBox = Hive.box('prayerBox');
+  //   setState(() {
+  //     _prayerStatus = {
+  //       "الفجر": prayerBox.get(
+  //         'الفجر',
+  //         defaultValue: false,
+  //       ),
+  //       "الضهر": prayerBox.get('${_selectedDate}الضهر', defaultValue: false),
+  //       "العصر": prayerBox.get('${_selectedDate.toIso8601String()}_العصر',
+  //           defaultValue: false),
+  //       "المغرب": prayerBox.get('${_selectedDate.toIso8601String()}_المغرب',
+  //           defaultValue: false),
+  //       "العشا": prayerBox.get('${_selectedDate.toIso8601String()}_العشا',
+  //           defaultValue: false),
+  //     };
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                   setState(() {
                     _selectedDate = date;
                   });
-                  _loadPrayerStatus(); // Reload prayer status for the new date
+                  // _loadPrayerStatus(); // Reload prayer status for the new date
                 },
               ),
               Gap(20),
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                 image: AppImages.moon,
                 isPrayed: _prayerStatus['الفجر'] ?? false,
                 onPrayerStatusChanged: (newStatus) {
-                  _updatePrayerStatus("الفجر", newStatus, _selectedDate);
+                  // _updatePrayerStatus("الفجر", newStatus, _selectedDate);
                 },
                 parentContext: context,
               ),
@@ -98,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                 image: AppImages.duhar,
                 isPrayed: _prayerStatus['الضهر'] ?? false,
                 onPrayerStatusChanged: (newStatus) {
-                  _updatePrayerStatus("الضهر", newStatus, _selectedDate);
+                  // _updatePrayerStatus("الضهر", newStatus, _selectedDate);
                 },
                 parentContext: context,
               ),
@@ -107,7 +107,7 @@ class _HomePageState extends State<HomePage> {
                 image: AppImages.asar,
                 isPrayed: _prayerStatus['العصر'] ?? false,
                 onPrayerStatusChanged: (newStatus) {
-                  _updatePrayerStatus("العصر", newStatus, _selectedDate);
+                  // _updatePrayerStatus("العصر", newStatus, _selectedDate);
                 },
                 parentContext: context,
               ),
@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> {
                 image: AppImages.magharib,
                 isPrayed: _prayerStatus['المغرب'] ?? false,
                 onPrayerStatusChanged: (newStatus) {
-                  _updatePrayerStatus("المغرب", newStatus, _selectedDate);
+                  // _updatePrayerStatus("المغرب", newStatus, _selectedDate);
                 },
                 parentContext: context,
               ),
@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                 image: AppImages.isha,
                 isPrayed: _prayerStatus['العشا'] ?? false,
                 onPrayerStatusChanged: (newStatus) {
-                  _updatePrayerStatus("العشا", newStatus, _selectedDate);
+                  // _updatePrayerStatus("العشا", newStatus, _selectedDate);
                 },
                 parentContext: context,
               ),
