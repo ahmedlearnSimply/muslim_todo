@@ -25,6 +25,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           decoration: BoxDecoration(color: AppColor.primaryColor),
           child: DatePicker(
             height: 100,
+            width: 70,
             DateTime.now(),
             deactivatedColor: AppColor.primaryColor,
             daysCount: DateTime.daysPerWeek,
