@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
+import 'package:muslim_todp/core/services/app_local_storage.dart';
 import 'package:muslim_todp/widgets/custom_appbar.dart';
 import 'package:muslim_todp/widgets/date_picker.dart';
 import 'package:muslim_todp/widgets/prayerTask.dart';
@@ -15,12 +16,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    super.initState();
-    // _loadPrayerStatus(); // Load prayer status when the app starts
-  }
-
   DateTime _selectedDate = DateTime.now();
   Map<String, bool> _prayerStatus = {
     "الفجر": false,
@@ -30,37 +25,33 @@ class _HomePageState extends State<HomePage> {
     "العشا": false,
   };
 
-  // void _updatePrayerStatus(
-  //     String prayerName, bool status, DateTime selectedDate) {
-  //   setState(() {
-  //     _prayerStatus[prayerName] = status;
-  //   });
-  //   // Save to Hive
-  //   final prayerBox = Hive.box('prayerBox');
-  //   prayerBox.put(
-  //     prayerName,
-  //     status,
-  //   );
-  // }
+  @override
+  void initState() {
+    super.initState();
+  }
 
-  // void _loadPrayerStatus() {
-  //   final prayerBox = Hive.box('prayerBox');
-  //   setState(() {
-  //     _prayerStatus = {
-  //       "الفجر": prayerBox.get(
-  //         'الفجر',
-  //         defaultValue: false,
-  //       ),
-  //       "الضهر": prayerBox.get('${_selectedDate}الضهر', defaultValue: false),
-  //       "العصر": prayerBox.get('${_selectedDate.toIso8601String()}_العصر',
-  //           defaultValue: false),
-  //       "المغرب": prayerBox.get('${_selectedDate.toIso8601String()}_المغرب',
-  //           defaultValue: false),
-  //       "العشا": prayerBox.get('${_selectedDate.toIso8601String()}_العشا',
-  //           defaultValue: false),
-  //     };
-  //   });
-  // }
+  // Load prayer status from Hive
+  void _loadPrayerStatus() {
+    setState(() {
+      _prayerStatus.forEach((prayerName, _) {
+        _prayerStatus[prayerName] = AppLocalStorage.getCachedData(
+              '${_selectedDate}_$prayerName',
+            ) ??
+            false;
+      });
+    });
+  }
+
+  // Update prayer status and save to Hive
+  void _updatePrayerStatus(String prayerName, bool status) {
+    setState(() {
+      _prayerStatus[prayerName] = status;
+    });
+    AppLocalStorage.cacheData(
+      '${_selectedDate}_$prayerName',
+      status,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,11 +67,10 @@ class _HomePageState extends State<HomePage> {
             children: [
               CustomDatePicker(
                 onDateSelected: (date) {
-                  // Update the selected date
                   setState(() {
                     _selectedDate = date;
                   });
-                  // _loadPrayerStatus(); // Reload prayer status for the new date
+                  _loadPrayerStatus(); // Reload prayer status for the new date
                 },
               ),
               Gap(20),
@@ -89,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                 image: AppImages.moon,
                 isPrayed: _prayerStatus['الفجر'] ?? false,
                 onPrayerStatusChanged: (newStatus) {
-                  // _updatePrayerStatus("الفجر", newStatus, _selectedDate);
+                  _updatePrayerStatus("الفجر", newStatus);
                 },
                 parentContext: context,
               ),
@@ -98,37 +88,11 @@ class _HomePageState extends State<HomePage> {
                 image: AppImages.duhar,
                 isPrayed: _prayerStatus['الضهر'] ?? false,
                 onPrayerStatusChanged: (newStatus) {
-                  // _updatePrayerStatus("الضهر", newStatus, _selectedDate);
+                  _updatePrayerStatus("الضهر", newStatus);
                 },
                 parentContext: context,
               ),
-              PrayerCard(
-                prayerName: "العصر",
-                image: AppImages.asar,
-                isPrayed: _prayerStatus['العصر'] ?? false,
-                onPrayerStatusChanged: (newStatus) {
-                  // _updatePrayerStatus("العصر", newStatus, _selectedDate);
-                },
-                parentContext: context,
-              ),
-              PrayerCard(
-                prayerName: "المغرب",
-                image: AppImages.magharib,
-                isPrayed: _prayerStatus['المغرب'] ?? false,
-                onPrayerStatusChanged: (newStatus) {
-                  // _updatePrayerStatus("المغرب", newStatus, _selectedDate);
-                },
-                parentContext: context,
-              ),
-              PrayerCard(
-                prayerName: "العشا",
-                image: AppImages.isha,
-                isPrayed: _prayerStatus['العشا'] ?? false,
-                onPrayerStatusChanged: (newStatus) {
-                  // _updatePrayerStatus("العشا", newStatus, _selectedDate);
-                },
-                parentContext: context,
-              ),
+              // Add more PrayerCards for other prayers
             ],
           ),
         ),

@@ -1,12 +1,10 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
-import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
+import 'package:muslim_todp/core/services/app_local_storage.dart';
 
-class PrayerCard extends StatelessWidget {
+class PrayerCard extends StatefulWidget {
   final String image;
   final String prayerName;
   final bool isPrayed;
@@ -22,45 +20,50 @@ class PrayerCard extends StatelessWidget {
     required this.parentContext,
   });
 
+  @override
+  State<PrayerCard> createState() => _PrayerCardState();
+}
+
+class _PrayerCardState extends State<PrayerCard> {
   void _showPrayerDialog() {
     showDialog(
-      context: parentContext,
+      context: widget.parentContext,
       builder: (context) {
         return AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20), // Rounded corners
+            borderRadius: BorderRadius.circular(20),
           ),
-          backgroundColor: Colors.white, // Background color
-          elevation: 10, // Add shadow
+          backgroundColor: Colors.white,
+          elevation: 10,
           title: Text(
             "هل صليت الفرض اليوم؟",
             style: TextStyle(
               fontFamily: 'cairo',
               fontSize: 22,
               fontWeight: FontWeight.bold,
-              color: AppColor.primaryColor, // Custom title color
+              color: AppColor.primaryColor,
             ),
             textAlign: TextAlign.center,
           ),
           content: Column(
-            mainAxisSize: MainAxisSize.min, // Minimize content height
+            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                prayerName, // Use the provided prayer name
+                widget.prayerName,
                 style: TextStyle(
                   fontFamily: 'cairoNormal',
                   fontSize: 24,
-                  color: Colors.black87, // Custom text color
+                  color: Colors.black87,
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(height: 10), // Add spacing
+              SizedBox(height: 10),
               Text(
                 "هل صليت؟",
                 style: TextStyle(
                   fontFamily: 'cairoNormal',
                   fontSize: 20,
-                  color: Colors.black54, // Custom text color
+                  color: Colors.black54,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -70,18 +73,17 @@ class PrayerCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // "No" Button
                 ElevatedButton(
                   onPressed: () {
-                    onPrayerStatusChanged(
-                        false); // Update prayer status to false
-                    Navigator.pop(context); // Close the dialog
+                    widget
+                        .onPrayerStatusChanged(false); // Update status to false
+                    Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red, // Button color
+                    backgroundColor: Colors.red,
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10), // Rounded button
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   child: Text(
@@ -89,21 +91,20 @@ class PrayerCard extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'cairo',
                       fontSize: 18,
-                      color: Colors.white, // Text color
+                      color: Colors.white,
                     ),
                   ),
                 ),
-                // "Yes" Button
                 ElevatedButton(
                   onPressed: () {
-                    onPrayerStatusChanged(true); // Update prayer status to true
-                    Navigator.pop(context); // Close the dialog
+                    widget.onPrayerStatusChanged(true); // Update status to true
+                    Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green, // Button color
+                    backgroundColor: Colors.green,
                     padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10), // Rounded button
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                   child: Text(
@@ -111,7 +112,7 @@ class PrayerCard extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'cairo',
                       fontSize: 18,
-                      color: Colors.white, // Text color
+                      color: Colors.white,
                     ),
                   ),
                 ),
@@ -128,7 +129,7 @@ class PrayerCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(12.0),
       child: GestureDetector(
-        onTap: _showPrayerDialog, // Show the dialog when tapped
+        onTap: _showPrayerDialog,
         child: Stack(
           children: [
             Container(
@@ -142,14 +143,14 @@ class PrayerCard extends StatelessWidget {
                 children: [
                   Gap(10),
                   SvgPicture.asset(
-                    image,
+                    widget.image,
                     colorFilter:
                         ColorFilter.mode(Colors.white, BlendMode.srcIn),
                     width: 60,
                   ),
                   Gap(20),
                   Text(
-                    prayerName, // Use the provided prayer name
+                    widget.prayerName,
                     style: TextStyle(
                       fontFamily: 'cairo',
                       color: Colors.white,
@@ -175,9 +176,8 @@ class PrayerCard extends StatelessWidget {
                     ),
                   ),
                   child: Icon(
-                    isPrayed ? Icons.gpp_good : Icons.gpp_bad, // Dynamic icon
-                    color:
-                        isPrayed ? Colors.green : Colors.red, // Dynamic color
+                    widget.isPrayed ? Icons.gpp_good : Icons.gpp_bad,
+                    color: widget.isPrayed ? Colors.green : Colors.red,
                     size: 60,
                   ),
                 ),
