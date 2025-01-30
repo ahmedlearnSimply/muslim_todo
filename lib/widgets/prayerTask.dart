@@ -1,17 +1,21 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
-import 'package:muslim_todp/core/services/app_local_storage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PrayerCard extends StatefulWidget {
   final String image;
   final String prayerName;
-  final bool isPrayed;
+  bool isPrayed;
   final Function(bool) onPrayerStatusChanged;
   final BuildContext parentContext;
 
-  const PrayerCard({
+  PrayerCard({
     super.key,
     required this.image,
     required this.prayerName,
@@ -20,11 +24,25 @@ class PrayerCard extends StatefulWidget {
     required this.parentContext,
   });
 
-  @override
   State<PrayerCard> createState() => _PrayerCardState();
 }
 
 class _PrayerCardState extends State<PrayerCard> {
+  //! saveData
+  void saveData() async {
+    // save data here
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(widget.prayerName, widget.isPrayed);
+  }
+
+  //! getdata
+  void getData() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      widget.isPrayed = prefs.getBool(widget.prayerName) ?? false;
+    });
+  }
+
   void _showPrayerDialog() {
     showDialog(
       context: widget.parentContext,
@@ -73,10 +91,11 @@ class _PrayerCardState extends State<PrayerCard> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                //! button for changing the icon to false
                 ElevatedButton(
                   onPressed: () {
-                    widget
-                        .onPrayerStatusChanged(false); // Update status to false
+                    widget.isPrayed = false;
+                    saveData();
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
@@ -97,8 +116,12 @@ class _PrayerCardState extends State<PrayerCard> {
                 ),
                 ElevatedButton(
                   onPressed: () {
-                    widget.onPrayerStatusChanged(true); // Update status to true
+                    widget.isPrayed = true;
+                    saveData();
                     Navigator.pop(context);
+                    log(widget.prayerName);
+                    getData();
+                    log(widget.isPrayed.toString());
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,

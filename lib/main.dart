@@ -32,10 +32,6 @@ import 'package:muslim_todp/core/services/app_local_storage.dart';
 import 'package:muslim_todp/pages/home_page.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Hive.initFlutter(); // Initialize Hive
-  await Hive.openBox('prayerBox');
-  AppLocalStorage.init(); // Open a Hive box for prayer status
   runApp(MyApp());
 }
 
