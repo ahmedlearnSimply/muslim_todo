@@ -43,6 +43,12 @@ class _PrayerCardState extends State<PrayerCard> {
     });
   }
 
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
   void _showPrayerDialog() {
     showDialog(
       context: widget.parentContext,
