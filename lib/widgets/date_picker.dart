@@ -28,7 +28,6 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
             width: 70,
             DateTime.now(),
             deactivatedColor: AppColor.primaryColor,
-            daysCount: DateTime.daysPerWeek,
             dayTextStyle: TextStyle(
               color: Colors.white,
             ),
