@@ -30,27 +30,23 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  // Load prayer status from Hive
-  void _loadPrayerStatus() {
-    setState(() {
-      _prayerStatus.forEach((prayerName, _) {
-        _prayerStatus[prayerName] = AppLocalStorage.getCachedData(
-              '${_selectedDate}_$prayerName',
-            ) ??
-            false;
-      });
-    });
-  }
+  // // Load prayer status from Hive
+  // void _loadPrayerStatus() {
+  //   setState(() {
+  //     _prayerStatus.forEach((prayerName, _) {
+  //       _prayerStatus[prayerName] = AppLocalStorage.getCachedData(
+  //             '${_selectedDate}_$prayerName',
+  //           ) ??
+  //           false;
+  //     });
+  //   });
+  // }
 
   // Update prayer status and save to Hive
   void _updatePrayerStatus(String prayerName, bool status) {
     setState(() {
       _prayerStatus[prayerName] = status;
     });
-    AppLocalStorage.cacheData(
-      '${_selectedDate}_$prayerName',
-      status,
-    );
   }
 
   @override
@@ -70,7 +66,6 @@ class _HomePageState extends State<HomePage> {
                   setState(() {
                     _selectedDate = date;
                   });
-                  _loadPrayerStatus(); // Reload prayer status for the new date
                 },
               ),
               Gap(20),
@@ -79,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                 image: AppImages.moon,
                 isPrayed: _prayerStatus['الفجر'] ?? false,
                 onPrayerStatusChanged: (newStatus) {
-                  _updatePrayerStatus("الفجر", newStatus);
+                  // _updatePrayerStatus("الفجر", newStatus);
                 },
                 parentContext: context,
               ),
@@ -88,7 +83,7 @@ class _HomePageState extends State<HomePage> {
                 image: AppImages.duhar,
                 isPrayed: _prayerStatus['الضهر'] ?? false,
                 onPrayerStatusChanged: (newStatus) {
-                  _updatePrayerStatus("الضهر", newStatus);
+                  // _updatePrayerStatus("الضهر", newStatus);
                 },
                 parentContext: context,
               ),
