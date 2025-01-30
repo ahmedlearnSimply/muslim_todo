@@ -32,45 +32,40 @@ class _HomePageState extends State<HomePage> {
     "العشا": false,
   };
   List<String> prayers = ["الفجر", "الضهر", "العصر", "المغرب", "العشا"];
-
+  bool _isLoading = true; // Add a loading state
   @override
   void initState() {
+    _loadPrayerStatus();
     super.initState();
   }
 
-// Load prayer status from SharedPreferences
-  // void _loadPrayerStatus() async {
-  //   final SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   setState(() {
-  //     for (String prayer in prayers) {
-  //       _prayerStatus[prayer] = prefs.getBool(prayer) ?? false;
-  //     }
-  //   });
-  // }
-
-  // Save prayer status to SharedPreferences
-//   void _savePrayerStatus(String prayerName, bool isPrayed) async {
-//     final SharedPreferences prefs = await SharedPreferences.getInstance();
-//     await prefs.setBool(prayerName, isPrayed);
-
-//   }
-// // Save prayer status for the selected date
-  void _savePrayerStatus(String prayerName, bool isPrayed) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String key = '${_selectedDate.toIso8601String()}_$prayerName';
-    // Include date in the key
-    await prefs.setBool(key, isPrayed);
+  // Generate a consistent key for saving/loading prayer status
+  String _getPrayerKey(String prayerName) {
+    // Use a consistent date format (e.g., 'yyyy-MM-dd')
+    String dateKey =
+        '${_selectedDate.year}-${_selectedDate.month}-${_selectedDate.day}';
+    return '${dateKey}_$prayerName';
   }
 
-// Load prayer status for the selected date
+  // Save prayer status for the selected date
+  void _savePrayerStatus(String prayerName, bool isPrayed) async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String key = _getPrayerKey(prayerName); // Use consistent key format
+    await prefs.setBool(key, isPrayed);
+    setState(() {
+      _prayerStatus[prayerName] = isPrayed;
+    });
+  }
+
+  // Load prayer status for the selected date
   void _loadPrayerStatus() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       for (String prayer in prayers) {
-        String key =
-            '${_selectedDate.toIso8601String()}_$prayer'; // Include date in the key
+        String key = _getPrayerKey(prayer); // Use consistent key format
         _prayerStatus[prayer] = prefs.getBool(key) ?? false;
       }
+      _isLoading = false; // Data loading is complete
     });
   }
 
@@ -82,24 +77,27 @@ class _HomePageState extends State<HomePage> {
         appBar: CustomAppBar(
           selectedDate: _selectedDate,
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              CustomDatePicker(
-                onDateSelected: (date) {
-                  setState(() {
-                    _selectedDate = date;
-                    _loadPrayerStatus();
-                  });
-                },
+        body: _isLoading
+            ? Center(child: CircularProgressIndicator())
+            : SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    CustomDatePicker(
+                      onDateSelected: (date) {
+                        setState(() {
+                          _selectedDate = date;
+                          _loadPrayerStatus();
+                        });
+                        _loadPrayerStatus();
+                      },
+                    ),
+                    Gap(20),
+                    buildPrayerCard('الفجر'),
+                    buildPrayerCard('الضهر'),
+                  ],
+                ),
               ),
-              Gap(20),
-              buildPrayerCard('الفجر'),
-              buildPrayerCard('الضهر'),
-            ],
-          ),
-        ),
       ),
     );
   }
