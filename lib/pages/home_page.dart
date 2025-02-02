@@ -9,6 +9,7 @@ import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 import 'package:muslim_todp/widgets/custom_appbar.dart';
 import 'package:muslim_todp/widgets/date_picker.dart';
+import 'package:muslim_todp/widgets/prayerTask.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -90,79 +91,39 @@ class _HomePageState extends State<HomePage> {
                       },
                     ),
                     Gap(20),
-                    buildPrayerCard('الفجر'),
-                    buildPrayerCard('الضهر'),
-                    buildPrayerCard('العصر'),
-                    buildPrayerCard('المغرب'),
-                    buildPrayerCard('العشا'),
+                    PrayerCard(
+                      prayerName: 'الفجر',
+                      onTap: () => _showPrayerDialog('الفجر'),
+                      isPrayerDone: _prayerStatus['الفجر']!,
+                      image: AppImages.moon,
+                    ),
+                    PrayerCard(
+                      prayerName: 'الضهر',
+                      onTap: () => _showPrayerDialog('الضهر'),
+                      isPrayerDone: _prayerStatus['الضهر']!,
+                      image: AppImages.duhar,
+                    ),
+                    PrayerCard(
+                      prayerName: 'العصر',
+                      onTap: () => _showPrayerDialog('العصر'),
+                      isPrayerDone: _prayerStatus['العصر']!,
+                      image: AppImages.asar,
+                    ),
+                    PrayerCard(
+                      prayerName: 'المغرب',
+                      onTap: () => _showPrayerDialog('المغرب'),
+                      isPrayerDone: _prayerStatus['المغرب']!,
+                      image: AppImages.magharib,
+                    ),
+                    PrayerCard(
+                      prayerName: 'العشا',
+                      onTap: () => _showPrayerDialog('العشا'),
+                      isPrayerDone: _prayerStatus['العشا']!,
+                      image: AppImages.isha,
+                    ),
                   ],
                 ),
               ),
-      ),
-    );
-  }
-
-  Padding buildPrayerCard(String prayerName) {
-    return Padding(
-      padding: const EdgeInsets.all(12.0),
-      child: GestureDetector(
-        onTap: () => _showPrayerDialog(prayerName),
-        child: Stack(
-          children: [
-            Container(
-              width: double.infinity,
-              height: 70,
-              decoration: BoxDecoration(
-                color: AppColor.primaryColor,
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Row(
-                children: [
-                  Gap(10),
-                  SvgPicture.asset(
-                    AppImages.praySvg,
-                    colorFilter:
-                        ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                    width: 60,
-                  ),
-                  Gap(20),
-                  Text(
-                    prayerName,
-                    style: TextStyle(
-                      fontFamily: 'cairo',
-                      color: Colors.white,
-                      fontSize: 24,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Container(
-                  width: 100,
-                  height: 70,
-                  decoration: BoxDecoration(
-                    color: AppColor.secondary,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(0),
-                      topRight: Radius.circular(15),
-                      bottomLeft: Radius.circular(0),
-                      bottomRight: Radius.circular(15),
-                    ),
-                  ),
-                  child: Icon(
-                    _prayerStatus[prayerName]! ? Icons.gpp_good : Icons.gpp_bad,
-                    color:
-                        _prayerStatus[prayerName]! ? Colors.green : Colors.red,
-                    size: 60,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
       ),
     );
   }
