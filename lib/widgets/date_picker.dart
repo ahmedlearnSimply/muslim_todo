@@ -26,7 +26,7 @@ class _CustomDatePickerState extends State<CustomDatePicker> {
           child: DatePicker(
             height: 100,
             width: 70,
-            DateTime.now(),
+            DateTime.now().subtract(Duration(days: 4)),
             deactivatedColor: AppColor.primaryColor,
             dayTextStyle: TextStyle(
               color: Colors.white,
