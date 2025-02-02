@@ -9,7 +9,7 @@ class CustomDatePicker extends StatefulWidget {
     super.key,
     required this.onDateSelected,
   });
-  final Function(DateTime) onDateSelected; // Callback function
+  final Function(DateTime) onDateSelected;
 
   @override
   State<CustomDatePicker> createState() => _CustomDatePickerState();
