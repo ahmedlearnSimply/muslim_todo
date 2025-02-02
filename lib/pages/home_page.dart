@@ -30,7 +30,8 @@ class _HomePageState extends State<HomePage> {
     "العشا": false,
   };
   List<String> prayers = ["الفجر", "الضهر", "العصر", "المغرب", "العشا"];
-  bool _isLoading = true; // Add a loading state
+  bool _isLoading = true;
+  int counter = 1;
   @override
   void initState() {
     _loadPrayerStatus();
@@ -64,6 +65,19 @@ class _HomePageState extends State<HomePage> {
         _prayerStatus[prayer] = prefs.getBool(key) ?? false;
       }
       _isLoading = false; // Data loading is complete
+    });
+  }
+
+  void showCompleteDialog() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      for (String prayer in prayers) {
+        String key = _getPrayerKey(prayer);
+
+        if (prefs.getBool(key) == true) {
+          counter++;
+        }
+      }
     });
   }
 
@@ -119,6 +133,15 @@ class _HomePageState extends State<HomePage> {
                 isPrayerDone: _prayerStatus['العشا']!,
                 image: AppImages.isha,
               ),
+              // (counter == 4)
+              //     ? Text(
+              //         "good",
+              //         style: TextStyle(fontSize: 40),
+              //       )
+              //     : Text(
+              //         "good",
+              //         style: TextStyle(fontSize: 40),
+              //       )
             ],
           ),
         ),
@@ -127,6 +150,7 @@ class _HomePageState extends State<HomePage> {
   }
 
 //! method
+
   void _showPrayerDialog(String prayerName) {
     showDialog(
       context: context,
@@ -207,6 +231,9 @@ class _HomePageState extends State<HomePage> {
                       _savePrayerStatus(prayerName, true);
                     });
                     Navigator.pop(context);
+                    if (_prayerStatus.values.every((status) => status)) {
+                      _showCompletionDialog();
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.green,
@@ -227,6 +254,81 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ],
+        );
+      },
+    );
+  }
+
+  void _showCompletionDialog() {
+    showGeneralDialog(
+      context: context,
+      barrierDismissible: true,
+      barrierLabel: '',
+      transitionDuration: Duration(milliseconds: 400),
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return ScaleTransition(
+          scale: animation,
+          child: AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            backgroundColor: Colors.white,
+            elevation: 10,
+            title: Center(
+              child: Column(
+                children: [
+                  Icon(Icons.check_circle, color: Colors.green, size: 60),
+                  SizedBox(height: 10),
+                  Text(
+                    "ما شاء الله!",
+                    style: TextStyle(
+                      fontFamily: 'cairo',
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            content: Text(
+              "لقد أكملت جميع الصلوات اليوم ✅",
+              style: TextStyle(
+                fontFamily: 'cairoNormal',
+                fontSize: 18,
+                color: Colors.black54,
+              ),
+              textAlign: TextAlign.center,
+            ),
+            actions: [
+              Center(
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColor.primaryColor,
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  child: Text(
+                    "حسناً",
+                    style: TextStyle(
+                      fontFamily: 'cairo',
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+      transitionBuilder: (context, animation, secondaryAnimation, child) {
+        return ScaleTransition(
+          scale: animation,
+          child: child,
         );
       },
     );
