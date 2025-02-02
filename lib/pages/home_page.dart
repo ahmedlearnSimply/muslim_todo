@@ -75,55 +75,53 @@ class _HomePageState extends State<HomePage> {
         appBar: CustomAppBar(
           selectedDate: _selectedDate,
         ),
-        body: _isLoading
-            ? Center(child: CircularProgressIndicator())
-            : SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    CustomDatePicker(
-                      onDateSelected: (date) {
-                        setState(() {
-                          _selectedDate = date;
-                          _loadPrayerStatus();
-                        });
-                        _loadPrayerStatus();
-                      },
-                    ),
-                    Gap(20),
-                    PrayerCard(
-                      prayerName: 'الفجر',
-                      onTap: () => _showPrayerDialog('الفجر'),
-                      isPrayerDone: _prayerStatus['الفجر']!,
-                      image: AppImages.moon,
-                    ),
-                    PrayerCard(
-                      prayerName: 'الضهر',
-                      onTap: () => _showPrayerDialog('الضهر'),
-                      isPrayerDone: _prayerStatus['الضهر']!,
-                      image: AppImages.duhar,
-                    ),
-                    PrayerCard(
-                      prayerName: 'العصر',
-                      onTap: () => _showPrayerDialog('العصر'),
-                      isPrayerDone: _prayerStatus['العصر']!,
-                      image: AppImages.asar,
-                    ),
-                    PrayerCard(
-                      prayerName: 'المغرب',
-                      onTap: () => _showPrayerDialog('المغرب'),
-                      isPrayerDone: _prayerStatus['المغرب']!,
-                      image: AppImages.magharib,
-                    ),
-                    PrayerCard(
-                      prayerName: 'العشا',
-                      onTap: () => _showPrayerDialog('العشا'),
-                      isPrayerDone: _prayerStatus['العشا']!,
-                      image: AppImages.isha,
-                    ),
-                  ],
-                ),
+        body: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              CustomDatePicker(
+                onDateSelected: (date) {
+                  setState(() {
+                    _selectedDate = date;
+                    _loadPrayerStatus();
+                  });
+                  _loadPrayerStatus();
+                },
               ),
+              Gap(20),
+              PrayerCard(
+                prayerName: 'الفجر',
+                onTap: () => _showPrayerDialog('الفجر'),
+                isPrayerDone: _prayerStatus['الفجر']!,
+                image: AppImages.moon,
+              ),
+              PrayerCard(
+                prayerName: 'الضهر',
+                onTap: () => _showPrayerDialog('الضهر'),
+                isPrayerDone: _prayerStatus['الضهر']!,
+                image: AppImages.duhar,
+              ),
+              PrayerCard(
+                prayerName: 'العصر',
+                onTap: () => _showPrayerDialog('العصر'),
+                isPrayerDone: _prayerStatus['العصر']!,
+                image: AppImages.asar,
+              ),
+              PrayerCard(
+                prayerName: 'المغرب',
+                onTap: () => _showPrayerDialog('المغرب'),
+                isPrayerDone: _prayerStatus['المغرب']!,
+                image: AppImages.magharib,
+              ),
+              PrayerCard(
+                prayerName: 'العشا',
+                onTap: () => _showPrayerDialog('العشا'),
+                isPrayerDone: _prayerStatus['العشا']!,
+                image: AppImages.isha,
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

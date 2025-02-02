@@ -68,8 +68,8 @@ class PrayerCard extends StatelessWidget {
                     ),
                   ),
                   child: Icon(
-                    isPrayerDone ? Icons.gpp_good : Icons.gpp_bad,
-                    color: isPrayerDone ? Colors.green : Colors.red,
+                    isPrayerDone ? Icons.star_rounded : Icons.star_half_rounded,
+                    color: isPrayerDone ? Colors.yellow : Colors.red,
                     size: 60,
                   ),
                 ),
