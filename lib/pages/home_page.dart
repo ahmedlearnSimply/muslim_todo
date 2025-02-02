@@ -20,9 +20,6 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   DateTime _selectedDate = DateTime.now();
-  void print() {
-    log(_selectedDate.toString());
-  }
 
   Map<String, bool> _prayerStatus = {
     "الفجر": false,
