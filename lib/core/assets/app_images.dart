@@ -8,4 +8,12 @@ class AppImages {
   static String asar = "assets/icons/asar.svg";
   static String magharib = "assets/icons/mag.svg";
   static String isha = "assets/icons/isha.svg";
+
+  static String morningPng = "assets/icons/sunrise.png";
+  static String nightPng = "assets/icons/night.png";
+  static String prayPng = "assets/icons/pray.png";
+  static String sleepPng = "assets/icons/sleep.png";
+
+  static String nigthPray = "assets/icons/nightpray.png";
+  static String rokaaPng = "assets/icons/rokaa.png";
 }

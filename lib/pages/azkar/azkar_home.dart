@@ -35,45 +35,128 @@ class AzkarHome extends StatelessWidget {
               ),
               Gap(20),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    height: 150,
-                    width: 150,
-                    decoration: BoxDecoration(
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.white.withOpacity(0.3), // Shadow color
-                          offset:
-                              Offset(1, 1), // Horizontal and vertical offset
-                          blurRadius: 5, // Blur radius
-                          spreadRadius: 2, // Spread radius (optional)
-                        ),
-                      ],
-                      borderRadius: BorderRadius.circular(20),
+                  AzkarHomeCard(
+                    image: AppImages.nightPng,
+                    title: "اذكار المساء",
+                    subtitle: "٢٥ ذكر",
+                  ),
+                  AzkarHomeCard(
+                    image: AppImages.morningPng,
+                    title: "اذكار الصباح",
+                    subtitle: "٢٥ ذكر",
+                  ),
+                ],
+              ),
+              Gap(20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Text(
+                    "اذكار متنوعه",
+                    style: TextStyle(
+                      fontFamily: 'cairoNormal',
+                      fontSize: 24,
                       color: Colors.white,
-                    ),
-                    child: Column(
-                      children: [
-                        Gap(10),
-                        CircleAvatar(
-                          radius: 40,
-                          backgroundColor: Colors.green,
-                          child: SvgPicture.asset(
-                            AppImages.isha,
-                            colorFilter:
-                                ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                            width: 60,
-                          ),
-                        ),
-                      ],
                     ),
                   ),
                 ],
-              )
+              ),
+              Gap(15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  AzkarHomeCard(
+                    image: AppImages.sleepPng,
+                    title: "اذكار النوم",
+                    subtitle: "٢٥ ذكر",
+                  ),
+                  AzkarHomeCard(
+                    image: AppImages.prayPng,
+                    title: "اذكار الصلاه",
+                    subtitle: "٢٥ ذكر",
+                  ),
+                ],
+              ),
+              Gap(15),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  AzkarHomeCard(
+                    image: AppImages.rokaaPng,
+                    title: "الرُّقية الشرعية",
+                    subtitle: "٢٥ ذكر",
+                  ),
+                  AzkarHomeCard(
+                    image: AppImages.nigthPray,
+                    title: "قيام الليل",
+                    subtitle: "٢٥ ذكر",
+                  ),
+                ],
+              ),
             ],
           ),
         ),
+      ),
+    );
+  }
+}
+
+class AzkarHomeCard extends StatelessWidget {
+  String image;
+  String title;
+  String subtitle;
+
+  AzkarHomeCard({
+    required this.image,
+    required this.title,
+    required this.subtitle,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 150,
+      width: 150,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.white.withOpacity(0.3), // Shadow color
+            offset: Offset(1, 1), // Horizontal and vertical offset
+            blurRadius: 5, // Blur radius
+            spreadRadius: 2, // Spread radius (optional)
+          ),
+        ],
+        borderRadius: BorderRadius.circular(20),
+        color: Colors.white,
+      ),
+      child: Column(
+        children: [
+          Gap(10),
+          Image.asset(
+            image,
+            width: 70,
+          ),
+          Gap(5),
+          Text(
+            title,
+            style: TextStyle(
+              fontFamily: 'cairo',
+              fontSize: 20,
+              color: Colors.black,
+            ),
+          ),
+          Text(
+            subtitle,
+            style: TextStyle(
+              fontFamily: 'cairoNormal',
+              fontSize: 16,
+              color: Colors.grey,
+            ),
+          ),
+        ],
       ),
     );
   }
