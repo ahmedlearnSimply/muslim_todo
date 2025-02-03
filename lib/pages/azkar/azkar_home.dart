@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
+import 'package:muslim_todp/pages/azkar/morning_app.dart';
 
 class AzkarHome extends StatelessWidget {
   const AzkarHome({super.key});
@@ -37,10 +38,18 @@ class AzkarHome extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  AzkarHomeCard(
-                    image: AppImages.nightPng,
-                    title: "اذكار المساء",
-                    subtitle: "٢٥ ذكر",
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MorningAzkar()),
+                      );
+                    },
+                    child: AzkarHomeCard(
+                      image: AppImages.nightPng,
+                      title: "اذكار المساء",
+                      subtitle: "٢٥ ذكر",
+                    ),
                   ),
                   AzkarHomeCard(
                     image: AppImages.morningPng,
