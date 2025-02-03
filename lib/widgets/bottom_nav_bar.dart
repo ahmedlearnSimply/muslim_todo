@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
+import 'package:muslim_todp/pages/azkar/azkar_home.dart';
 import 'package:muslim_todp/pages/home_page.dart';
 
 class NavBarWidget extends StatefulWidget {
@@ -17,7 +18,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
   int currentPage = 0;
   List<Widget> pages = [
     const HomePage(),
-    const Center(child: Text("Azkar")),
+    const AzkarHome(),
     const Center(child: Text("states")),
     const Center(child: Text("مسبحه")),
   ];
