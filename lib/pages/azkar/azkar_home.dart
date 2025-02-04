@@ -56,7 +56,7 @@ class AzkarHome extends StatelessWidget {
                     child: AzkarHomeCard(
                       image: AppImages.morningPng,
                       title: "اذكار الصباح",
-                      subtitle: "٢٥ ذكر",
+                      subtitle: "٢١ ذكر",
                     ),
                   ),
                 ],

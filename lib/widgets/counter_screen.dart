@@ -71,7 +71,7 @@ class _CounterScreenState extends State<CounterScreen> {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(12),
                     color: (widget.flag == 1)
-                        ? AppColor.primaryColor
+                        ? AppColor.background
                         : Color(0xff3f826d),
                   ),
                   child: Row(
