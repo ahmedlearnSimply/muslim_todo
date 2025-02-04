@@ -7,6 +7,7 @@ import 'dart:ffi';
 
 import 'package:date_picker_timeline/extra/color.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 import 'package:muslim_todp/widgets/counter_screen.dart';
@@ -77,34 +78,30 @@ class _MorningAzkarState extends State<MorningAzkar> {
             icon: Icon(
               Icons.arrow_back_ios_new_rounded,
               size: 28,
+              color: Colors.white,
             ),
           ),
           toolbarHeight: 100,
-          backgroundColor: AppColor.secondary,
+          backgroundColor: AppColor.background,
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Stack(
-                alignment: Alignment.topCenter,
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(top: 18),
-                    width: 100,
-                    child: Opacity(
-                      opacity: 1,
-                      child: Image.asset(
-                        AppImages.morningPng,
-                      ),
-                    ),
+              Container(
+                margin: EdgeInsets.only(top: 18),
+                width: 100,
+                child: Opacity(
+                  opacity: 1,
+                  child: Image.asset(
+                    AppImages.morningPng,
                   ),
-                ],
+                ),
               ),
               Container(
                 margin: EdgeInsets.only(top: 41),
                 child: Text(
                   "اذكار الصباح",
                   style: TextStyle(
-                    fontFamily: 'cairoNormal',
+                    fontFamily: 'cairo',
                     fontSize: 24,
                     color: Colors.white,
                   ),

@@ -39,6 +39,14 @@ class AzkarHome extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   GestureDetector(
+                    onTap: () {},
+                    child: AzkarHomeCard(
+                      image: AppImages.nightPng,
+                      title: "اذكار المساء",
+                      subtitle: "٢٥ ذكر",
+                    ),
+                  ),
+                  GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
@@ -46,15 +54,10 @@ class AzkarHome extends StatelessWidget {
                       );
                     },
                     child: AzkarHomeCard(
-                      image: AppImages.nightPng,
-                      title: "اذكار المساء",
+                      image: AppImages.morningPng,
+                      title: "اذكار الصباح",
                       subtitle: "٢٥ ذكر",
                     ),
-                  ),
-                  AzkarHomeCard(
-                    image: AppImages.morningPng,
-                    title: "اذكار الصباح",
-                    subtitle: "٢٥ ذكر",
                   ),
                 ],
               ),
