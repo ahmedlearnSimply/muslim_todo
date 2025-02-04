@@ -7,10 +7,12 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:intl/intl.dart';
 import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 import 'package:muslim_todp/widgets/counter_screen.dart';
 import 'package:muslim_todp/widgets/custom_appbar.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MorningAzkar extends StatefulWidget {
   const MorningAzkar({super.key});
@@ -22,7 +24,10 @@ class MorningAzkar extends StatefulWidget {
 class _MorningAzkarState extends State<MorningAzkar> {
   @override
   Widget build(BuildContext context) {
-    List numberOfAzkar = [
+    //* variables
+    int counter = 0;
+
+    List<int> counters = [
       1,
       3,
       3,
@@ -68,65 +73,127 @@ class _MorningAzkarState extends State<MorningAzkar> {
       "اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلا أَنْتَ ، عَلَيْكَ تَوَكَّلْتُ ، وَأَنْتَ رَبُّ الْعَرْشِ الْعَظِيمِ , مَا شَاءَ اللَّهُ كَانَ ، وَمَا لَمْ يَشَأْ لَمْ يَكُنْ ، وَلا حَوْلَ وَلا قُوَّةَ إِلا بِاللَّهِ الْعَلِيِّ الْعَظِيمِ , أَعْلَمُ أَنَّ اللَّهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ ، وَأَنَّ اللَّهَ قَدْ أَحَاطَ بِكُلِّ شَيْءٍ عِلْمًا , اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي ، وَمِنْ شَرِّ كُلِّ دَابَّةٍ أَنْتَ آخِذٌ بِنَاصِيَتِهَا ، إِنَّ رَبِّي عَلَى صِرَاطٍ مُسْتَقِيمٍ.",
     ];
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          // leadingWidth: 26,
-          leading: Center(
-            child: Custom_button(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              icon: Icons.arrow_back,
-            ),
-          ),
+    Future<void> _loadCounters() async {
+      final prefs = await SharedPreferences.getInstance();
+      String? lastSavedDate = prefs.getString('lastDate');
+      String todayDate = DateTime.now().toString();
 
-          toolbarHeight: 90,
-          backgroundColor: AppColor.primaryColor,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 18),
-                width: 100,
-                child: Opacity(
-                  opacity: 1,
-                  child: Image.asset(
-                    AppImages.morningPng,
-                  ),
-                ),
-              ),
-              Gap(20),
-              Container(
-                margin: EdgeInsets.only(top: 30),
-                child: Text(
-                  "اذكار الصباح",
-                  style: TextStyle(
-                    fontFamily: 'cairo',
-                    fontSize: 30,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
+      if (lastSavedDate == null || lastSavedDate != todayDate) {
+        // Reset counters if it's a new day
+        setState(() {
+          counters = [
+            1,
+            3,
+            3,
+            3,
+            1,
+            1,
+            3,
+            4,
+            1,
+            7,
+            3,
+            1,
+            3,
+            3,
+            3,
+            3,
+            1,
+            3,
+            1,
+            1,
+            3
+          ];
+        });
+        await prefs.setString('lastDate', todayDate);
+      } else {
+        // Load saved counters
+        setState(() {
+          for (int i = 0; i < counters.length; i++) {
+            counters[i] = prefs.getInt('counter_$i') ?? counters[i];
+          }
+        });
+      }
+    }
+
+    @override
+    void initState() {
+      super.initState();
+      _loadCounters();
+    }
+
+    Future<void> _saveCounters() async {
+      final prefs = await SharedPreferences.getInstance();
+      for (int i = 0; i < counters.length; i++) {
+        await prefs.setInt('counter_$i', counters[i]);
+      }
+    }
+
+    void _decrementCounter(int index) {
+      print("Decrementing counter at index $index"); // Debugging
+      setState(() {
+        if (counters[index] > 0) {
+          counters[index]--;
+        }
+      });
+      _saveCounters();
+    }
+
+    return SafeArea(
+        child: Scaffold(
+      appBar: AppBar(
+        // leadingWidth: 26,
+        leading: Center(
+          child: Custom_button(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            icon: Icons.arrow_back,
           ),
         ),
-        backgroundColor: AppColor.background,
-        body: Padding(
-          padding: const EdgeInsets.only(left: 16, right: 16),
-          child: ListView(
-            shrinkWrap: false,
-            physics: BouncingScrollPhysics(),
-            children: [
-              for (var index = 0; index < azkar.length; index++)
-                CounterScreen(
-                  counter: numberOfAzkar[index],
-                  text: azkar[index],
-                )
-            ],
-          ),
+
+        toolbarHeight: 90,
+        backgroundColor: AppColor.primaryColor,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Container(
+              margin: EdgeInsets.only(top: 18),
+              width: 100,
+              child: Opacity(
+                opacity: 1,
+                child: Image.asset(
+                  AppImages.morningPng,
+                ),
+              ),
+            ),
+            Gap(20),
+            Container(
+              margin: EdgeInsets.only(top: 30),
+              child: Text(
+                "اذكار الصباح",
+                style: TextStyle(
+                  fontFamily: 'cairo',
+                  fontSize: 30,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
-    );
+      backgroundColor: AppColor.background,
+      body: ListView.builder(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          physics: BouncingScrollPhysics(),
+          itemCount: azkar.length,
+          itemBuilder: (context, index) {
+            return CounterScreen(
+              counter: counters[index],
+              text: azkar[index],
+              onDecrement: () => _decrementCounter(index),
+            );
+          }),
+    ));
   }
 }
