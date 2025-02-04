@@ -1,59 +1,38 @@
-// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, prefer_const_constructors
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 
-//Todo :
-// must finish this problem search on it
-int colorr = 0;
+class CounterScreen extends StatelessWidget {
+  final int counter;
+  final String text;
+  final VoidCallback onDecrement;
 
-// ignore: must_be_immutable
-class CounterScreen extends StatefulWidget {
-  int counter = 0;
-  int flag = 1;
-  String text = "";
+  const CounterScreen({
+    required this.counter,
+    required this.text,
+    required this.onDecrement,
+  });
 
-  // static int counter = 5;
-  CounterScreen({required this.counter, required this.text});
-  @override
-  _CounterScreenState createState() => _CounterScreenState();
-}
-
-class _CounterScreenState extends State<CounterScreen> {
   @override
   Widget build(BuildContext context) {
-    void _decrementCounter() {
-      setState(() {
-        widget.counter--;
-        if (widget.counter == 0) {
-          widget.flag = 0;
-        }
-      });
-    }
+    bool isCompleted = counter == 0;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         children: [
-          Gap(10),
           Container(
             padding: EdgeInsets.all(18),
-            width: double.infinity,
             decoration: BoxDecoration(
-              color: widget.flag == 1
-                  ? AppColor.primaryColor
-                  : Color.fromARGB(255, 25, 26, 26),
+              color: isCompleted ? Colors.grey : AppColor.primaryColor,
               borderRadius: BorderRadius.circular(16),
-              border: Border.all(
-                width: 1,
-                color: Colors.white,
-              ),
+              border: Border.all(color: Colors.white, width: 1),
             ),
             child: Column(
               children: [
                 Text(
-                  widget.text,
+                  text,
                   style: TextStyle(
                     fontFamily: 'cairoNormal',
                     fontSize: 18,
@@ -61,118 +40,8 @@ class _CounterScreenState extends State<CounterScreen> {
                   ),
                   textAlign: TextAlign.center,
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-                //counter of azkar
-                Container(
-                  width: 350,
-                  height: 55,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    color: (widget.flag == 1)
-                        ? AppColor.background
-                        : Color(0xff3f826d),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ElevatedButton(
-                        onPressed: () {
-                          //share button
-                          // Share.share(widget.text);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: (widget.flag == 1)
-                              ? Colors.transparent
-                              : Color(0xff1d201f),
-                          elevation: 0,
-                          shape: CircleBorder(
-                            side: BorderSide(
-                              width: 1,
-                              style: BorderStyle.solid,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        child: Icon(
-                          Icons.share,
-                          color: (widget.flag == 1)
-                              ? Color.fromARGB(255, 230, 228, 242)
-                              : Color(0xffe1e6e1),
-                        ),
-                      ),
-                      Text(
-                        "مشاركة",
-                        style: TextStyle(
-                          fontFamily: 'cairoNormal',
-                          fontSize: 24,
-                          color: Colors.white,
-                        ),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(
-                        height: 40,
-                        child: VerticalDivider(
-                          color: Colors.white,
-                          width: 20,
-                          thickness: 2,
-                        ),
-                      ),
-                      widget.flag == 1 //if flag = 1 , so make
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    _decrementCounter();
-                                  },
-                                  child: Text(
-                                    "${widget.counter}",
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 21),
-                                  ),
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor:
-                                        Color.fromARGB(0, 239, 97, 97),
-                                    elevation: 0,
-                                    shape: CircleBorder(
-                                      side: BorderSide(
-                                        width: 1,
-                                        style: BorderStyle.solid,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  "التكرار",
-                                  style: TextStyle(
-                                    fontFamily: 'cairoNormal',
-                                    fontSize: 24,
-                                    color: Colors.white,
-                                  ),
-                                  textAlign: TextAlign.right,
-                                ),
-                              ],
-                            )
-                          : Container(
-                              //i think solution are here
-
-                              width: 150,
-                              child: Text(
-                                "تم",
-                                style: TextStyle(
-                                  fontFamily: 'cairoNormal',
-                                  fontSize: 24,
-                                  color: Colors.white,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                            ),
-                    ],
-                  ),
-                ),
+                SizedBox(height: 10),
+                _buildCounterRow(isCompleted),
               ],
             ),
           ),
@@ -180,108 +49,54 @@ class _CounterScreenState extends State<CounterScreen> {
       ),
     );
   }
-}
-/** 
- * 
- * 
- * 
- * 
- * Container(
+
+  Widget _buildCounterRow(bool isCompleted) {
+    return Container(
       width: 350,
       height: 55,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: (widget.flag == 1) ? primary : Color(0xff3f826d),
+        color: isCompleted ? Color(0xff3f826d) : AppColor.background,
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  (widget.flag == 1) ? Colors.transparent : Color(0xff1d201f),
-              elevation: 0,
-              shape: CircleBorder(
-                side: BorderSide(
-                  width: 1,
-                  style: BorderStyle.solid,
-                  color: Colors.white,
+          IconButton(
+            icon: Icon(Icons.share, color: Colors.white),
+            onPressed: () {
+              // Share functionality
+            },
+          ),
+          Text("مشاركة",
+              style: TextStyle(
+                  fontFamily: 'cairoNormal',
+                  fontSize: 24,
+                  color: Colors.white)),
+          VerticalDivider(color: Colors.white, width: 20, thickness: 2),
+          if (!isCompleted)
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.remove, color: Colors.white),
+                  onPressed: onDecrement,
                 ),
-              ),
-            ),
-            child: Icon(
-              Icons.share,
-              color: (widget.flag == 1)
-                  ? Color.fromARGB(255, 230, 228, 242)
-                  : Color(0xffe1e6e1),
-            ),
-          ),
-          Text(
-            "مشاركة",
-            style: GoogleFonts.cairo(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: (widget.flag == 1)
-                  ? Color.fromARGB(255, 230, 228, 242)
-                  : Color(0xffe1e6e1),
-            ),
-            textAlign: TextAlign.center,
-          ),
-          SizedBox(
-            height: 40,
-            child: VerticalDivider(
-              color: Colors.white,
-              width: 20,
-              thickness: 2,
-            ),
-          ),
-          widget.flag == 1 //if flag = 1 , so make
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        _decrementCounter();
-                      },
-                      child: Text("${widget.counter}"),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Color.fromARGB(0, 239, 97, 97),
-                        elevation: 0,
-                        shape: CircleBorder(
-                          side: BorderSide(
-                            width: 1,
-                            style: BorderStyle.solid,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Text(
-                      "التكرار",
-                      style: GoogleFonts.cairo(
+                Text("$counter",
+                    style: TextStyle(fontSize: 21, color: Colors.white)),
+                Text("التكرار",
+                    style: TextStyle(
+                        fontFamily: 'cairoNormal',
                         fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 230, 228, 242),
-                      ),
-                      textAlign: TextAlign.right,
-                    ),
-                  ],
-                )
-              : Container(
-                  //i think solution are here
-
-                  width: 150,
-                  child: Text(
-                    "تم",
-                    style: GoogleFonts.cairo(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Color.fromARGB(255, 255, 255, 255),
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
+                        color: Colors.white)),
+              ],
+            )
+          else
+            Text("تم",
+                style: TextStyle(
+                    fontFamily: 'cairoNormal',
+                    fontSize: 24,
+                    color: Colors.white)),
         ],
       ),
-    );**/
+    );
+  }
+}
