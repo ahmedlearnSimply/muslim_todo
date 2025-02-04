@@ -39,25 +39,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         Padding(
           padding: EdgeInsets.all(10),
-          child: Container(
-            width: 40, // Adjust width as needed
-            height: 40, // Adjust height as needed
-            decoration: BoxDecoration(
-              color: AppColor.blue,
-              borderRadius: BorderRadius.circular(20), // Adjust border radius
-            ),
-            child: Center(
-              // Center the IconButton
-              child: IconButton(
-                onPressed: () {},
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 30, // Adjust icon size as needed
-                ),
-                padding: EdgeInsets.zero, // Remove default padding
-              ),
-            ),
+          child: Custom_button(
+            onTap: () {},
+            icon: Icons.add,
           ),
         )
       ],
@@ -83,6 +67,41 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       centerTitle: true,
       backgroundColor: AppColor.primaryColor,
+    );
+  }
+}
+
+class Custom_button extends StatelessWidget {
+  IconData icon;
+  Function() onTap = () {};
+
+  Custom_button({
+    required this.onTap,
+    required this.icon,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 40, // Adjust width as needed
+      height: 40, // Adjust height as needed
+      decoration: BoxDecoration(
+        color: AppColor.blue,
+        borderRadius: BorderRadius.circular(20), // Adjust border radius
+      ),
+      child: Center(
+        // Center the IconButton
+        child: IconButton(
+          onPressed: onTap,
+          icon: Icon(
+            icon,
+            color: Colors.white,
+            size: 30, // Adjust icon size as needed
+          ),
+          padding: EdgeInsets.zero, // Remove default padding
+        ),
+      ),
     );
   }
 }

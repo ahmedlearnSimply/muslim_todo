@@ -1,4 +1,7 @@
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 
 //Todo :
@@ -33,9 +36,7 @@ class _CounterScreenState extends State<CounterScreen> {
       padding: const EdgeInsets.only(bottom: 10),
       child: Column(
         children: [
-          SizedBox(
-            height: 20,
-          ),
+          Gap(10),
           Container(
             padding: EdgeInsets.all(18),
             width: double.infinity,
@@ -55,7 +56,7 @@ class _CounterScreenState extends State<CounterScreen> {
                   widget.text,
                   style: TextStyle(
                     fontFamily: 'cairoNormal',
-                    fontSize: 24,
+                    fontSize: 18,
                     color: Colors.white,
                   ),
                   textAlign: TextAlign.center,

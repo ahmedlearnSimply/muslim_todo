@@ -11,6 +11,7 @@ import 'package:gap/gap.dart';
 import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 import 'package:muslim_todp/widgets/counter_screen.dart';
+import 'package:muslim_todp/widgets/custom_appbar.dart';
 
 class MorningAzkar extends StatefulWidget {
   const MorningAzkar({super.key});
@@ -70,21 +71,20 @@ class _MorningAzkarState extends State<MorningAzkar> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          leadingWidth: 26,
-          leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back_ios_new_rounded,
-              size: 28,
-              color: Colors.white,
+          // leadingWidth: 26,
+          leading: Center(
+            child: Custom_button(
+              onTap: () {
+                Navigator.pop(context);
+              },
+              icon: Icons.arrow_back,
             ),
           ),
-          toolbarHeight: 100,
-          backgroundColor: AppColor.background,
+
+          toolbarHeight: 90,
+          backgroundColor: AppColor.primaryColor,
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
                 margin: EdgeInsets.only(top: 18),
@@ -96,13 +96,14 @@ class _MorningAzkarState extends State<MorningAzkar> {
                   ),
                 ),
               ),
+              Gap(20),
               Container(
-                margin: EdgeInsets.only(top: 41),
+                margin: EdgeInsets.only(top: 30),
                 child: Text(
                   "اذكار الصباح",
                   style: TextStyle(
                     fontFamily: 'cairo',
-                    fontSize: 24,
+                    fontSize: 30,
                     color: Colors.white,
                   ),
                 ),
@@ -110,7 +111,7 @@ class _MorningAzkarState extends State<MorningAzkar> {
             ],
           ),
         ),
-        backgroundColor: AppColor.secondary,
+        backgroundColor: AppColor.background,
         body: Padding(
           padding: const EdgeInsets.only(left: 16, right: 16),
           child: ListView(
