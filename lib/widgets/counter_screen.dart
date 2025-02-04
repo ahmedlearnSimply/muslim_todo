@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 
-class CounterScreen extends StatelessWidget {
+class CounterScreen extends StatefulWidget {
   final int counter;
   final String text;
   final VoidCallback onDecrement;
@@ -15,8 +15,13 @@ class CounterScreen extends StatelessWidget {
   });
 
   @override
+  State<CounterScreen> createState() => _CounterScreenState();
+}
+
+class _CounterScreenState extends State<CounterScreen> {
+  @override
   Widget build(BuildContext context) {
-    bool isCompleted = counter == 0;
+    bool isCompleted = widget.counter == 0;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
@@ -32,7 +37,7 @@ class CounterScreen extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  text,
+                  widget.text,
                   style: TextStyle(
                     fontFamily: 'cairoNormal',
                     fontSize: 18,
@@ -78,9 +83,13 @@ class CounterScreen extends StatelessWidget {
               children: [
                 IconButton(
                   icon: Icon(Icons.remove, color: Colors.white),
-                  onPressed: onDecrement,
+                  onPressed: () {
+                    setState(() {
+                      widget.onDecrement();
+                    });
+                  },
                 ),
-                Text("$counter",
+                Text("${widget.counter} ",
                     style: TextStyle(fontSize: 21, color: Colors.white)),
                 Text("التكرار",
                     style: TextStyle(

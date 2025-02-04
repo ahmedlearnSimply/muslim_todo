@@ -134,6 +134,7 @@ class _MorningAzkarState extends State<MorningAzkar> {
       setState(() {
         if (counters[index] > 0) {
           counters[index]--;
+          counter--;
         }
       });
       _saveCounters();
@@ -191,7 +192,7 @@ class _MorningAzkarState extends State<MorningAzkar> {
             return CounterScreen(
               counter: counters[index],
               text: azkar[index],
-              onDecrement: () => _decrementCounter(index),
+              onDecrement: () => _decrementCounter(counter),
             );
           }),
     ));
