@@ -4,11 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 
 class CounterScreen extends StatefulWidget {
-  final int counter;
-  final String text;
-  final VoidCallback onDecrement;
+  int counter;
+  String text;
+  VoidCallback onDecrement;
 
-  const CounterScreen({
+  CounterScreen({
     required this.counter,
     required this.text,
     required this.onDecrement,
@@ -85,7 +85,9 @@ class _CounterScreenState extends State<CounterScreen> {
                   icon: Icon(Icons.remove, color: Colors.white),
                   onPressed: () {
                     setState(() {
-                      widget.onDecrement();
+                      widget.counter--;
+
+                      // widget.onDecrement();
                     });
                   },
                 ),
