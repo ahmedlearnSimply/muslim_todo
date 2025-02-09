@@ -4,12 +4,12 @@ import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class MorningAzkar extends StatefulWidget {
+class NightApp extends StatefulWidget {
   @override
-  _MorningAzkarState createState() => _MorningAzkarState();
+  _NightApp createState() => _NightApp();
 }
 
-class _MorningAzkarState extends State<MorningAzkar> {
+class _NightApp extends State<NightApp> {
   late SharedPreferences prefs;
   Map<String, int> azkar = {
     "أعوذ بالله من الشيطان الرجيم : { اللّهُ لاَ إِلَـهَ إِلاَّ هُوَ الْحَيُّ الْقَيُّومُ لاَ تَأْخُذُهُ سِنَةٌ وَلاَ نَوْمٌ لَّهُ مَا فِي السَّمَاوَاتِ وَمَا فِي الأَرْضِ مَن ذَا الَّذِي يَشْفَعُ عِنْدَهُ إِلاَّ بِإِذْنِهِ يَعْلَمُ مَا بَيْنَ أَيْدِيهِمْ وَمَا خَلْفَهُمْ وَلاَ يُحِيطُونَ بِشَيْءٍ مِنْ عِلْمِهِ إِلاَّ بِمَا شَاءَ وَسِعَ كُرْسِيُّهُ السَّمَاوَاتِ وَالأَرْضَ وَلاَ يَؤُودُهُ حِفْظُهُمَا وَهُوَ الْعَلِيُّ الْعَظِيمُ } .":
