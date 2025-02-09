@@ -132,9 +132,13 @@ class CounterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColor.primaryColor,
+        borderRadius: BorderRadius.circular(20),
+      ),
       margin: EdgeInsets.symmetric(vertical: 8),
-      elevation: 2,
+      // elevation: 2,
       child: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -143,32 +147,50 @@ class CounterScreen extends StatelessWidget {
             Text(
               text,
               style: TextStyle(
-                fontFamily: 'cairo',
-                fontSize: 18,
-                color: Colors.black87,
+                letterSpacing: .4,
+                fontFamily: 'cairoNormal',
+                height: 2,
+                fontSize: 16,
+                color: Colors.white,
               ),
+              textAlign: TextAlign.center,
             ),
             SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  counter > 0 ? counter.toString() : "تم",
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: counter > 0 ? Colors.blue : Colors.green,
-                  ),
-                ),
-                if (counter > 0)
-                  ElevatedButton(
-                    onPressed: _decrementCounter,
-                    child: Text(
-                      "إنقاص",
-                      style: TextStyle(fontSize: 16),
+            Container(
+              height: 50,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      counter > 0 ? counter.toString() : "تم",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontFamily: 'cairoNormal',
+                        fontWeight: FontWeight.bold,
+                        color: counter > 0 ? Colors.blue : Colors.green,
+                      ),
+                      textAlign: TextAlign.center,
                     ),
-                  ),
-              ],
+                    if (counter > 0)
+                      ElevatedButton(
+                        onPressed: _decrementCounter,
+                        child: Text(
+                          "إنقاص",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontFamily: 'cairoNormal',
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),
