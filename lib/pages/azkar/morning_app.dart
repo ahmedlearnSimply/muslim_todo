@@ -25,7 +25,6 @@ class _MorningAzkarState extends State<MorningAzkar> {
   @override
   Widget build(BuildContext context) {
     //* variables
-    int counter = 0;
 
     List<int> counters = [
       1,
