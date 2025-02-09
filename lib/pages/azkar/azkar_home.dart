@@ -41,10 +41,10 @@ class AzkarHome extends StatelessWidget {
                 children: [
                   GestureDetector(
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => NightApp()),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => NightApp()),
+                      // );
                     },
                     child: AzkarHomeCard(
                       image: AppImages.nightPng,

@@ -131,7 +131,7 @@ class _MorningAzkarState extends State<MorningAzkar> {
   }
 
   Future<void> _saveLastUsedDate(DateTime date) async {
-    await prefs.setString('lastUsedDate', date.toIso8601String());
+    await prefs.setString('lastUsedDate', date.toString());
   }
 
   Future<DateTime?> _loadLastUsedDate() async {
