@@ -38,8 +38,6 @@ class _QeamAzkarState extends State<QeamAzkar> {
         4,
     "اللّهُـمَّ ما أَمسى بي مِـنْ نِعْـمَةٍ أَو بِأَحَـدٍ مِـنْ خَلْـقِك ، فَمِـنْكَ وَحْـدَكَ لا شريكَ لَـك ، فَلَـكَ الْحَمْـدُ وَلَـكَ الشُّكْـر.":
         1,
-    "اللّهُـمَّ ما أَمسى بي مِـنْ نِعْـمَةٍ أَو بِأَحَـدٍ مِـنْ خَلْـقِك ، فَمِـنْكَ وَحْـدَكَ لا شريكَ لَـك ، فَلَـكَ الْحَمْـدُ وَلَـكَ الشُّكْـر.":
-        7,
     "حَسْبِـيَ اللّهُ لا إلهَ إلاّ هُوَ عَلَـيهِ تَوَكَّـلتُ وَهُوَ رَبُّ العَرْشِ العَظـيم.":
         3,
     "بِسـمِ اللهِ الذي لا يَضُـرُّ مَعَ اسمِـهِ شَيءٌ في الأرْضِ وَلا في السّمـاءِ وَهـوَ السّمـيعُ العَلـيم.":
@@ -139,7 +137,7 @@ class _QeamAzkarState extends State<QeamAzkar> {
                 child: Opacity(
                   opacity: 1,
                   child: Image.asset(
-                    AppImages.nightPng,
+                    AppImages.nigthPray,
                   ),
                 ),
               ),
@@ -147,7 +145,7 @@ class _QeamAzkarState extends State<QeamAzkar> {
               Container(
                 margin: EdgeInsets.only(top: 30),
                 child: Text(
-                  "اذكار المساء",
+                  "قيام الليل",
                   style: TextStyle(
                     fontFamily: 'cairo',
                     fontSize: 30,

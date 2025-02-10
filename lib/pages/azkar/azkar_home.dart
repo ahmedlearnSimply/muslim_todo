@@ -144,7 +144,7 @@ class AzkarHome extends StatelessWidget {
                     child: AzkarHomeCard(
                       image: AppImages.rokaaPng,
                       title: "الرُّقية الشرعية",
-                      subtitle: "٢٥ ذكر",
+                      subtitle: "٧ ذكر",
                     ),
                   ),
                   GestureDetector(

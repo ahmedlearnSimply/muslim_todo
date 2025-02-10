@@ -104,7 +104,7 @@ class _SleepingAzkarState extends State<SleepingAzkar> {
                 child: Opacity(
                   opacity: 1,
                   child: Image.asset(
-                    AppImages.nightPng,
+                    AppImages.sleepPng,
                   ),
                 ),
               ),
@@ -112,7 +112,7 @@ class _SleepingAzkarState extends State<SleepingAzkar> {
               Container(
                 margin: EdgeInsets.only(top: 30),
                 child: Text(
-                  "اذكار المساء",
+                  "اذكار النوم",
                   style: TextStyle(
                     fontFamily: 'cairo',
                     fontSize: 30,
