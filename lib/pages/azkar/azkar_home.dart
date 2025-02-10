@@ -9,6 +9,9 @@ import 'package:muslim_todp/core/colors/app_color.dart';
 import 'package:muslim_todp/pages/azkar/morning_app.dart';
 import 'package:muslim_todp/pages/azkar/night_app.dart';
 import 'package:muslim_todp/pages/azkar/pray_azkar.dart';
+import 'package:muslim_todp/pages/azkar/qeam_azkar.dart';
+import 'package:muslim_todp/pages/azkar/rokae.dart';
+import 'package:muslim_todp/pages/azkar/sleeping_azkar.dart';
 
 class AzkarHome extends StatelessWidget {
   AzkarHome({super.key});
@@ -54,7 +57,7 @@ class AzkarHome extends StatelessWidget {
                     child: AzkarHomeCard(
                       image: AppImages.nightPng,
                       title: "اذكار المساء",
-                      subtitle: "٢٥ ذكر",
+                      subtitle: "٢٠ ذكر",
                     ),
                   ),
                   GestureDetector(
@@ -92,10 +95,20 @@ class AzkarHome extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  AzkarHomeCard(
-                    image: AppImages.sleepPng,
-                    title: "اذكار النوم",
-                    subtitle: "٢٥ ذكر",
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                SleepingAzkar(selectedDate: _selectedDate)),
+                      );
+                    },
+                    child: AzkarHomeCard(
+                      image: AppImages.sleepPng,
+                      title: "اذكار النوم",
+                      subtitle: "١٢ ذكر",
+                    ),
                   ),
                   GestureDetector(
                     onTap: () {
@@ -109,7 +122,7 @@ class AzkarHome extends StatelessWidget {
                     child: AzkarHomeCard(
                       image: AppImages.prayPng,
                       title: "اذكار الصلاه",
-                      subtitle: "٢٥ ذكر",
+                      subtitle: "١٢ ذكر",
                     ),
                   ),
                 ],
@@ -118,15 +131,37 @@ class AzkarHome extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  AzkarHomeCard(
-                    image: AppImages.rokaaPng,
-                    title: "الرُّقية الشرعية",
-                    subtitle: "٢٥ ذكر",
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Rokae(
+                                  selectedDate: _selectedDate,
+                                )),
+                      );
+                    },
+                    child: AzkarHomeCard(
+                      image: AppImages.rokaaPng,
+                      title: "الرُّقية الشرعية",
+                      subtitle: "٢٥ ذكر",
+                    ),
                   ),
-                  AzkarHomeCard(
-                    image: AppImages.nigthPray,
-                    title: "قيام الليل",
-                    subtitle: "٢٥ ذكر",
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => QeamAzkar(
+                                  selectedDate: _selectedDate,
+                                )),
+                      );
+                    },
+                    child: AzkarHomeCard(
+                      image: AppImages.nigthPray,
+                      title: "قيام الليل",
+                      subtitle: "٢٥ ذكر",
+                    ),
                   ),
                 ],
               ),
