@@ -8,6 +8,7 @@ import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 import 'package:muslim_todp/pages/azkar/morning_app.dart';
 import 'package:muslim_todp/pages/azkar/night_app.dart';
+import 'package:muslim_todp/pages/azkar/pray_azkar.dart';
 
 class AzkarHome extends StatelessWidget {
   AzkarHome({super.key});
@@ -96,10 +97,20 @@ class AzkarHome extends StatelessWidget {
                     title: "اذكار النوم",
                     subtitle: "٢٥ ذكر",
                   ),
-                  AzkarHomeCard(
-                    image: AppImages.prayPng,
-                    title: "اذكار الصلاه",
-                    subtitle: "٢٥ ذكر",
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                PrayAzkar(selectedDate: _selectedDate)),
+                      );
+                    },
+                    child: AzkarHomeCard(
+                      image: AppImages.prayPng,
+                      title: "اذكار الصلاه",
+                      subtitle: "٢٥ ذكر",
+                    ),
                   ),
                 ],
               ),
