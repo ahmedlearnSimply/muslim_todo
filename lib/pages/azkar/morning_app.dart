@@ -70,7 +70,7 @@ class _MorningAzkarState extends State<MorningAzkar> {
 
     azkar.forEach((key, value) {
       String dateKey =
-          '${selectedDate.year}-${selectedDate.month}-${selectedDate.day}_$key';
+          'morning_${selectedDate.year}-${selectedDate.month}-${selectedDate.day}_$key';
       loadedAzkar[key] = prefs.getInt(dateKey) ?? value;
     });
 
@@ -81,7 +81,7 @@ class _MorningAzkarState extends State<MorningAzkar> {
 
   Future<void> _saveCounter(String key, int value) async {
     String dateKey =
-        '${widget.selectedDate.year}-${widget.selectedDate.month}-${widget.selectedDate.day}_$key';
+        'morning_${widget.selectedDate.year}-${widget.selectedDate.month}-${widget.selectedDate.day}_$key';
     await prefs.setInt(dateKey, value);
   }
 
