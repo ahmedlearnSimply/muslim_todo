@@ -10,7 +10,8 @@ import 'package:muslim_todp/pages/azkar/morning_app.dart';
 import 'package:muslim_todp/pages/azkar/night_app.dart';
 
 class AzkarHome extends StatelessWidget {
-  const AzkarHome({super.key});
+  AzkarHome({super.key});
+  DateTime _selectedDate = DateTime.now(); // Track selected date
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +57,9 @@ class AzkarHome extends StatelessWidget {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => MorningAzkar()),
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                MorningAzkar(selectedDate: _selectedDate)),
                       );
                     },
                     child: AzkarHomeCard(

@@ -18,7 +18,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
   int currentPage = 0;
   List<Widget> pages = [
     const HomePage(),
-    const AzkarHome(),
+    AzkarHome(),
     const Center(child: Text("states")),
     const Center(child: Text("مسبحه")),
   ];
