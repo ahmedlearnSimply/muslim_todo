@@ -142,27 +142,28 @@ class AzkarHome extends StatelessWidget {
                       );
                     },
                     child: AzkarHomeCard(
+                      width: 200,
                       image: AppImages.rokaaPng,
                       title: "الرُّقية الشرعية",
                       subtitle: "٧ ذكر",
                     ),
                   ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => QeamAzkar(
-                                  selectedDate: _selectedDate,
-                                )),
-                      );
-                    },
-                    child: AzkarHomeCard(
-                      image: AppImages.nigthPray,
-                      title: "قيام الليل",
-                      subtitle: "٢٥ ذكر",
-                    ),
-                  ),
+                  // GestureDetector(
+                  //   onTap: () {
+                  //     Navigator.push(
+                  //       context,
+                  //       MaterialPageRoute(
+                  //           builder: (context) => QeamAzkar(
+                  //                 selectedDate: _selectedDate,
+                  //               )),
+                  //     );
+                  //   },
+                  //   child: AzkarHomeCard(
+                  //     image: AppImages.nigthPray,
+                  //     title: "قيام الليل",
+                  //     subtitle: "٢٥ ذكر",
+                  //   ),
+                  // ),
                 ],
               ),
             ],
@@ -177,9 +178,13 @@ class AzkarHomeCard extends StatelessWidget {
   String image;
   String title;
   String subtitle;
+  double height;
+  double width;
 
   AzkarHomeCard({
     required this.image,
+    this.height = 150,
+    this.width = 150,
     required this.title,
     required this.subtitle,
     super.key,
@@ -188,8 +193,8 @@ class AzkarHomeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
-      width: 150,
+      height: height,
+      width: width,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
