@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Tasbeeh extends StatefulWidget {
   const Tasbeeh({super.key});
@@ -16,7 +17,54 @@ class Tasbeeh extends StatefulWidget {
 class _TasbeehState extends State<Tasbeeh> {
   DateTime _selectedDate = DateTime.now();
   int counter = 0;
+  int totalCounter = 0;
   double _scale = 1.0;
+
+  //* Shared perfreneces logic
+  //! Save Data
+  Future<void> saveData() async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setInt('counter', counter);
+    prefs.setInt('totalCounter', totalCounter);
+  }
+
+  //! load data
+  Future<void> loadData() async {
+    final prefs = await SharedPreferences.getInstance();
+    int counter = prefs.getInt('counter') ?? 0;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _loadCounter();
+  }
+
+  Future<void> _loadCounter() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      counter = prefs.getInt('counter') ?? 0;
+      totalCounter = prefs.getInt('totalCounter') ?? 0;
+    });
+  }
+
+  Future<void> _incrementCounter() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      counter++;
+      totalCounter++;
+    });
+    await prefs.setInt('counter', counter);
+    await prefs.setInt('totalCounter', totalCounter);
+  }
+
+  Future<void> _resetCounter() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      counter = 0;
+    });
+    await prefs.setInt('counter', counter);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +141,7 @@ class _TasbeehState extends State<Tasbeeh> {
                   onPressed: () {
                     //* reset the counter
                     setState(() {
-                      counter = 0;
+                      _resetCounter();
                     });
                   },
                   child: Icon(Icons.replay, color: Colors.white),
@@ -121,7 +169,7 @@ class _TasbeehState extends State<Tasbeeh> {
               onTapUp: (_) {
                 setState(() {
                   _scale = 1.0; // Expand back to normal size
-                  counter++;
+                  _incrementCounter();
                 });
               },
               onTapCancel: () {
@@ -155,7 +203,7 @@ class _TasbeehState extends State<Tasbeeh> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  counter.toString(),
+                  totalCounter.toString(),
                   style: TextStyle(
                       fontFamily: 'cairo',
                       fontSize: 24,
@@ -180,24 +228,24 @@ class _TasbeehState extends State<Tasbeeh> {
     );
   }
 }
-   // GestureDetector(
-            //   onTap: () {
-            //     //*increase the counter
-            //     setState(() {
-            //       counter++;
-            //     });
-            //   },
-            //   child: Container(
-            //     width: 300,
-            //     height: 300,
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(150),
-            //       gradient: LinearGradient(
-            //         colors: [
-            //           const Color.fromARGB(255, 101, 183, 250),
-            //           AppColor.blue,
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // ),
+// GestureDetector(
+//   onTap: () {
+//     //*increase the counter
+//     setState(() {
+//       counter++;
+//     });
+//   },
+//   child: Container(
+//     width: 300,
+//     height: 300,
+//     decoration: BoxDecoration(
+//       borderRadius: BorderRadius.circular(150),
+//       gradient: LinearGradient(
+//         colors: [
+//           const Color.fromARGB(255, 101, 183, 250),
+//           AppColor.blue,
+//         ],
+//       ),
+//     ),
+//   ),
+// ),
