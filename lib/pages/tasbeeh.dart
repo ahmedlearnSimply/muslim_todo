@@ -23,25 +23,6 @@ class _TasbeehState extends State<Tasbeeh> {
     return Scaffold(
       backgroundColor: AppColor.background,
       appBar: AppBar(
-        // leading: Center(
-        //     // child: IconButton(
-        //     //   onPressed: () {
-        //     //     Navigator.pop(context);
-        //     //   },
-        //     //   icon: Container(
-        //     //     height: 40,
-        //     //     width: 40,
-        //     //     decoration: BoxDecoration(
-        //     //       color: AppColor.blue,
-        //     //       borderRadius: BorderRadius.circular(20),
-        //     //     ),
-        //     //     child: Icon(
-        //     //       Icons.arrow_back,
-        //     //       color: Colors.white,
-        //     //     ),
-        //     //   ),
-        //     // ),
-        //     ),
         toolbarHeight: 90,
         backgroundColor: AppColor.primaryColor,
         title: Row(
@@ -154,10 +135,14 @@ class _TasbeehState extends State<Tasbeeh> {
                   width: 300,
                   height: 300,
                   decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.white,
+                      width: 2,
+                    ),
                     borderRadius: BorderRadius.circular(150),
                     gradient: LinearGradient(
                       colors: [
-                        const Color.fromARGB(255, 101, 183, 250),
+                        const Color.fromARGB(255, 65, 150, 220),
                         AppColor.blue,
                       ],
                     ),
