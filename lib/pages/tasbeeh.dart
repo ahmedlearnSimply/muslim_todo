@@ -66,6 +66,28 @@ class _TasbeehState extends State<Tasbeeh> {
     await prefs.setInt('counter', counter);
   }
 
+  // Function to get the day name
+  String _getDayName(int weekday) {
+    switch (weekday) {
+      case 1:
+        return 'الإثنين';
+      case 2:
+        return 'الثلاثاء';
+      case 3:
+        return 'الأربعاء';
+      case 4:
+        return 'الخميس';
+      case 5:
+        return 'الجمعة';
+      case 6:
+        return 'السبت';
+      case 7:
+        return 'الأحد';
+      default:
+        return '';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -114,16 +136,28 @@ class _TasbeehState extends State<Tasbeeh> {
                 ),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: Center(
-                child: Text(
-                  counter.toString(),
-                  style: TextStyle(
-                    fontFamily: 'cairo',
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Text(
+                    counter.toString(),
+                    style: TextStyle(
+                      fontFamily: 'cairo',
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
+                  Text(
+                    " تسبيح  ${_getDayName(_selectedDate.weekday)}",
+                    style: TextStyle(
+                      fontFamily: 'cairoNormal',
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
             Gap(20),
