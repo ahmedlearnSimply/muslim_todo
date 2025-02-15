@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_final_fields
+// ignore_for_file: prefer_const_constructors, prefer_final_fields, prefer_const_literals_to_create_immutables, sort_child_properties_last
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -70,8 +70,83 @@ class _TasbeehState extends State<Tasbeeh> {
           ],
         ),
       ),
-      body: Center(
-        child: Text('Tasbeeh App'),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            Gap(20),
+            Container(
+              height: 80,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.transparent,
+                border: Border.all(
+                  color: Colors.white,
+                ),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Center(
+                child: Text(
+                  "Counter",
+                  style: TextStyle(
+                    fontFamily: 'cairo',
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            Gap(20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                Gap(20),
+                FloatingActionButton(
+                  shape: RoundedRectangleBorder(
+                    // Custom shape
+                    borderRadius: BorderRadius.circular(20), // Rounded edges
+                    side: BorderSide(
+                        color: Colors.white, width: 2), // White border
+                  ),
+                  onPressed: () {
+                    //* reset the counter
+                  },
+                  child: Icon(Icons.replay, color: Colors.white),
+                  backgroundColor: AppColor.blue,
+                ),
+                Gap(10),
+                Text(
+                  "اعاده",
+                  style: TextStyle(
+                    fontFamily: 'cairo',
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: AppColor.blue,
+                  ),
+                ),
+              ],
+            ),
+            Gap(20),
+            GestureDetector(
+              onTap: () {
+                //*increase the counter
+              },
+              child: Container(
+                width: 300,
+                height: 300,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(150),
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.green,
+                        AppColor.blue,
+                      ],
+                    )),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
