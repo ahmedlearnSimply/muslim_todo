@@ -13,6 +13,7 @@ class AppImages {
   static String nightPng = "assets/icons/night.png";
   static String prayPng = "assets/icons/pray.png";
   static String sleepPng = "assets/icons/sleep.png";
+  static String beadsPng = "assets/icons/beads.png";
 
   static String nigthPray = "assets/icons/nightpray.png";
   static String rokaaPng = "assets/icons/rokaa.png";
