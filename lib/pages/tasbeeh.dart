@@ -16,31 +16,32 @@ class Tasbeeh extends StatefulWidget {
 class _TasbeehState extends State<Tasbeeh> {
   DateTime _selectedDate = DateTime.now();
   int counter = 0;
+  double _scale = 1.0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColor.background,
       appBar: AppBar(
-        leading: Center(
-          child: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Container(
-              height: 40,
-              width: 40,
-              decoration: BoxDecoration(
-                color: AppColor.blue,
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Icon(
-                Icons.arrow_back,
-                color: Colors.white,
-              ),
-            ),
-          ),
-        ),
+        // leading: Center(
+        //     // child: IconButton(
+        //     //   onPressed: () {
+        //     //     Navigator.pop(context);
+        //     //   },
+        //     //   icon: Container(
+        //     //     height: 40,
+        //     //     width: 40,
+        //     //     decoration: BoxDecoration(
+        //     //       color: AppColor.blue,
+        //     //       borderRadius: BorderRadius.circular(20),
+        //     //     ),
+        //     //     child: Icon(
+        //     //       Icons.arrow_back,
+        //     //       color: Colors.white,
+        //     //     ),
+        //     //   ),
+        //     // ),
+        //     ),
         toolbarHeight: 90,
         backgroundColor: AppColor.primaryColor,
         title: Row(
@@ -48,7 +49,7 @@ class _TasbeehState extends State<Tasbeeh> {
           children: [
             Container(
               margin: EdgeInsets.only(top: 18),
-              width: 75,
+              width: 70,
               child: Opacity(
                 opacity: 1,
                 child: Image.asset(AppImages.beadsPng),
@@ -131,22 +132,35 @@ class _TasbeehState extends State<Tasbeeh> {
             ),
             Gap(10),
             GestureDetector(
-              onTap: () {
-                //*increase the counter
+              onTapDown: (_) {
                 setState(() {
+                  _scale = 0.99; // Shrink when pressed
+                });
+              },
+              onTapUp: (_) {
+                setState(() {
+                  _scale = 1.0; // Expand back to normal size
                   counter++;
                 });
               },
-              child: Container(
-                width: 300,
-                height: 300,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(150),
-                  gradient: LinearGradient(
-                    colors: [
-                      const Color.fromARGB(255, 101, 183, 250),
-                      AppColor.blue,
-                    ],
+              onTapCancel: () {
+                setState(() {
+                  _scale = 1.0; // Reset if tap is canceled
+                });
+              },
+              child: Transform.scale(
+                scale: _scale,
+                child: Container(
+                  width: 300,
+                  height: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(150),
+                    gradient: LinearGradient(
+                      colors: [
+                        const Color.fromARGB(255, 101, 183, 250),
+                        AppColor.blue,
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -181,3 +195,24 @@ class _TasbeehState extends State<Tasbeeh> {
     );
   }
 }
+   // GestureDetector(
+            //   onTap: () {
+            //     //*increase the counter
+            //     setState(() {
+            //       counter++;
+            //     });
+            //   },
+            //   child: Container(
+            //     width: 300,
+            //     height: 300,
+            //     decoration: BoxDecoration(
+            //       borderRadius: BorderRadius.circular(150),
+            //       gradient: LinearGradient(
+            //         colors: [
+            //           const Color.fromARGB(255, 101, 183, 250),
+            //           AppColor.blue,
+            //         ],
+            //       ),
+            //     ),
+            //   ),
+            // ),
