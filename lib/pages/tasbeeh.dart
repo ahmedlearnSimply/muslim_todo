@@ -5,8 +5,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:gap/gap.dart';
 import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
-import 'package:muslim_todp/pages/azkar/pray_azkar.dart';
-import 'package:muslim_todp/widgets/custom_appbar.dart';
 
 class Tasbeeh extends StatefulWidget {
   const Tasbeeh({super.key});
@@ -16,7 +14,8 @@ class Tasbeeh extends StatefulWidget {
 }
 
 class _TasbeehState extends State<Tasbeeh> {
-  DateTime _selectedDate = DateTime.now(); // Track selected date
+  DateTime _selectedDate = DateTime.now();
+  int counter = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +86,7 @@ class _TasbeehState extends State<Tasbeeh> {
               ),
               child: Center(
                 child: Text(
-                  "Counter",
+                  counter.toString(),
                   style: TextStyle(
                     fontFamily: 'cairo',
                     fontSize: 24,
@@ -111,6 +110,9 @@ class _TasbeehState extends State<Tasbeeh> {
                   ),
                   onPressed: () {
                     //* reset the counter
+                    setState(() {
+                      counter = 0;
+                    });
                   },
                   child: Icon(Icons.replay, color: Colors.white),
                   backgroundColor: AppColor.blue,
@@ -127,23 +129,51 @@ class _TasbeehState extends State<Tasbeeh> {
                 ),
               ],
             ),
-            Gap(20),
+            Gap(10),
             GestureDetector(
               onTap: () {
                 //*increase the counter
+                setState(() {
+                  counter++;
+                });
               },
               child: Container(
                 width: 300,
                 height: 300,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(150),
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.green,
-                        AppColor.blue,
-                      ],
-                    )),
+                  borderRadius: BorderRadius.circular(150),
+                  gradient: LinearGradient(
+                    colors: [
+                      const Color.fromARGB(255, 101, 183, 250),
+                      AppColor.blue,
+                    ],
+                  ),
+                ),
               ),
+            ),
+            Gap(10),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  counter.toString(),
+                  style: TextStyle(
+                      fontFamily: 'cairo',
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                      color: const Color.fromARGB(255, 72, 172, 253)),
+                ),
+                Gap(20),
+                Text(
+                  "مجموع التسبيحات",
+                  style: TextStyle(
+                    fontFamily: 'cairoNormal',
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
