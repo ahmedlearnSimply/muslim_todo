@@ -6,6 +6,7 @@ import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 import 'package:muslim_todp/pages/azkar/azkar_home.dart';
 import 'package:muslim_todp/pages/home_page.dart';
+import 'package:muslim_todp/pages/tasbeeh.dart';
 
 class NavBarWidget extends StatefulWidget {
   const NavBarWidget({super.key});
@@ -20,7 +21,7 @@ class _NavBarWidgetState extends State<NavBarWidget> {
     const HomePage(),
     AzkarHome(),
     const Center(child: Text("states")),
-    const Center(child: Text("مسبحه")),
+    Tasbeeh(),
   ];
 
   @override

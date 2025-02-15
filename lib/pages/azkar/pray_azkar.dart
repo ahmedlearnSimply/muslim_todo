@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -72,56 +72,7 @@ class _PrayAzkarState extends State<PrayAzkar> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColor.background,
-        appBar: AppBar(
-          leading: Center(
-            child: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Container(
-                height: 40,
-                width: 40,
-                decoration: BoxDecoration(
-                  color: AppColor.blue,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ),
-          toolbarHeight: 90,
-          backgroundColor: AppColor.primaryColor,
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                margin: EdgeInsets.only(top: 18),
-                width: 100,
-                child: Opacity(
-                  opacity: 1,
-                  child: Image.asset(
-                    AppImages.prayPng,
-                  ),
-                ),
-              ),
-              Gap(20),
-              Container(
-                margin: EdgeInsets.only(top: 30),
-                child: Text(
-                  "اذكار الصلاه",
-                  style: TextStyle(
-                    fontFamily: 'cairo',
-                    fontSize: 30,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
+        appBar: SecondCustomAppBar(),
         body: ListView.builder(
           padding: EdgeInsets.symmetric(horizontal: 16),
           physics: BouncingScrollPhysics(),
@@ -140,6 +91,68 @@ class _PrayAzkarState extends State<PrayAzkar> {
             );
           },
         ),
+      ),
+    );
+  }
+}
+
+class SecondCustomAppBar extends StatelessWidget
+    implements PreferredSizeWidget {
+  @override
+  final Size preferredSize;
+  SecondCustomAppBar({Key? key})
+      : preferredSize = const Size.fromHeight(90),
+        super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    return AppBar(
+      leading: Center(
+        child: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+              color: AppColor.blue,
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            ),
+          ),
+        ),
+      ),
+      toolbarHeight: 90,
+      backgroundColor: AppColor.primaryColor,
+      title: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Container(
+            margin: EdgeInsets.only(top: 18),
+            width: 100,
+            child: Opacity(
+              opacity: 1,
+              child: Image.asset(
+                AppImages.prayPng,
+              ),
+            ),
+          ),
+          Gap(20),
+          Container(
+            margin: EdgeInsets.only(top: 30),
+            child: Text(
+              "اذكار الصلاه",
+              style: TextStyle(
+                fontFamily: 'cairo',
+                fontSize: 30,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
