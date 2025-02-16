@@ -22,151 +22,165 @@ class AzkarHome extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColor.background,
-        body: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Column(
-            children: [
-              Gap(20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "اذكار الصباح والمساء",
-                    style: TextStyle(
-                      fontFamily: 'cairoNormal',
-                      fontSize: 24,
-                      color: Colors.white,
-                    ),
-                  ),
-                ],
+        body: Container(
+          width: double.infinity,
+          height: double.infinity,
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              colorFilter: ColorFilter.mode(
+                Colors.black.withOpacity(0.5), // Adjust opacity (0.0 - 1.0)
+                BlendMode.darken, // Applies the color filter
               ),
-              Gap(20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => NightAzkar(
-                                  selectedDate: _selectedDate,
-                                )),
-                      );
-                    },
-                    child: AzkarHomeCard(
-                      image: AppImages.nightPng,
-                      title: "اذكار المساء",
-                      subtitle: "٢٠ ذكر",
+              image: AssetImage("assets/icons/stars.jpg"), // Local image
+              fit: BoxFit.cover, // Covers the entire screen
+            ),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              children: [
+                Gap(20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "اذكار الصباح والمساء",
+                      style: TextStyle(
+                        fontFamily: 'cairoNormal',
+                        fontSize: 24,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                MorningAzkar(selectedDate: _selectedDate)),
-                      );
-                    },
-                    child: AzkarHomeCard(
-                      image: AppImages.morningPng,
-                      title: "اذكار الصباح",
-                      subtitle: "٢١ ذكر",
+                  ],
+                ),
+                Gap(20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NightAzkar(
+                                    selectedDate: _selectedDate,
+                                  )),
+                        );
+                      },
+                      child: AzkarHomeCard(
+                        image: AppImages.nightPng,
+                        title: "اذكار المساء",
+                        subtitle: "٢٠ ذكر",
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Gap(20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Text(
-                    "اذكار متنوعه",
-                    style: TextStyle(
-                      fontFamily: 'cairoNormal',
-                      fontSize: 24,
-                      color: Colors.white,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  MorningAzkar(selectedDate: _selectedDate)),
+                        );
+                      },
+                      child: AzkarHomeCard(
+                        image: AppImages.morningPng,
+                        title: "اذكار الصباح",
+                        subtitle: "٢١ ذكر",
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Gap(15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                SleepingAzkar(selectedDate: _selectedDate)),
-                      );
-                    },
-                    child: AzkarHomeCard(
-                      image: AppImages.sleepPng,
-                      title: "اذكار النوم",
-                      subtitle: "١٢ ذكر",
+                  ],
+                ),
+                Gap(20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "اذكار متنوعه",
+                      style: TextStyle(
+                        fontFamily: 'cairoNormal',
+                        fontSize: 24,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                PrayAzkar(selectedDate: _selectedDate)),
-                      );
-                    },
-                    child: AzkarHomeCard(
-                      image: AppImages.prayPng,
-                      title: "اذكار الصلاه",
-                      subtitle: "١٢ ذكر",
+                  ],
+                ),
+                Gap(15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  SleepingAzkar(selectedDate: _selectedDate)),
+                        );
+                      },
+                      child: AzkarHomeCard(
+                        image: AppImages.sleepPng,
+                        title: "اذكار النوم",
+                        subtitle: "١٢ ذكر",
+                      ),
                     ),
-                  ),
-                ],
-              ),
-              Gap(15),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Rokae(
-                                  selectedDate: _selectedDate,
-                                )),
-                      );
-                    },
-                    child: AzkarHomeCard(
-                      width: 200,
-                      image: AppImages.rokaaPng,
-                      title: "الرُّقية الشرعية",
-                      subtitle: "٧ ذكر",
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  PrayAzkar(selectedDate: _selectedDate)),
+                        );
+                      },
+                      child: AzkarHomeCard(
+                        image: AppImages.prayPng,
+                        title: "اذكار الصلاه",
+                        subtitle: "١٢ ذكر",
+                      ),
                     ),
-                  ),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     Navigator.push(
-                  //       context,
-                  //       MaterialPageRoute(
-                  //           builder: (context) => QeamAzkar(
-                  //                 selectedDate: _selectedDate,
-                  //               )),
-                  //     );
-                  //   },
-                  //   child: AzkarHomeCard(
-                  //     image: AppImages.nigthPray,
-                  //     title: "قيام الليل",
-                  //     subtitle: "٢٥ ذكر",
-                  //   ),
-                  // ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                Gap(15),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Rokae(
+                                    selectedDate: _selectedDate,
+                                  )),
+                        );
+                      },
+                      child: AzkarHomeCard(
+                        width: 200,
+                        image: AppImages.rokaaPng,
+                        title: "الرُّقية الشرعية",
+                        subtitle: "٧ ذكر",
+                      ),
+                    ),
+                    // GestureDetector(
+                    //   onTap: () {
+                    //     Navigator.push(
+                    //       context,
+                    //       MaterialPageRoute(
+                    //           builder: (context) => QeamAzkar(
+                    //                 selectedDate: _selectedDate,
+                    //               )),
+                    //     );
+                    //   },
+                    //   child: AzkarHomeCard(
+                    //     image: AppImages.nigthPray,
+                    //     title: "قيام الليل",
+                    //     subtitle: "٢٥ ذكر",
+                    //   ),
+                    // ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

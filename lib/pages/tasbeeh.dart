@@ -121,35 +121,144 @@ class _TasbeehState extends State<Tasbeeh> {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Gap(20),
-            Container(
-              height: 80,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.transparent,
-                border: Border.all(
-                  color: Colors.white,
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            colorFilter: ColorFilter.mode(
+              Colors.black.withOpacity(0.5), // Adjust opacity (0.0 - 1.0)
+              BlendMode.darken, // Applies the color filter
+            ),
+            image: AssetImage("assets/icons/stars.jpg"), // Local image
+            fit: BoxFit.cover, // Covers the entire screen
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Gap(20),
+              Container(
+                height: 80,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.transparent,
+                  border: Border.all(
+                    color: Colors.white,
+                  ),
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                borderRadius: BorderRadius.circular(20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      counter.toString(),
+                      style: TextStyle(
+                        fontFamily: 'cairo',
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Text(
+                      " تسبيح  ${_getDayName(_selectedDate.weekday)}",
+                      style: TextStyle(
+                        fontFamily: 'cairoNormal',
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+              Gap(20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
+                  Gap(20),
+                  FloatingActionButton(
+                    shape: RoundedRectangleBorder(
+                      // Custom shape
+                      borderRadius: BorderRadius.circular(20), // Rounded edges
+                      side: BorderSide(
+                          color: Colors.white, width: 2), // White border
+                    ),
+                    onPressed: () {
+                      //* reset the counter
+                      setState(() {
+                        _resetCounter();
+                      });
+                    },
+                    child: Icon(Icons.replay, color: Colors.white),
+                    backgroundColor: AppColor.blue,
+                  ),
+                  Gap(10),
                   Text(
-                    counter.toString(),
+                    "اعاده",
                     style: TextStyle(
-                      fontFamily: 'cairo',
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                        fontFamily: 'cairo',
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue),
+                  ),
+                ],
+              ),
+              Gap(10),
+              GestureDetector(
+                onTapDown: (_) {
+                  setState(() {
+                    _scale = 0.99; // Shrink when pressed
+                  });
+                },
+                onTapUp: (_) {
+                  setState(() {
+                    _scale = 1.0; // Expand back to normal size
+                    _incrementCounter();
+                  });
+                },
+                onTapCancel: () {
+                  setState(() {
+                    _scale = 1.0; // Reset if tap is canceled
+                  });
+                },
+                child: Transform.scale(
+                  scale: _scale,
+                  child: Container(
+                    width: 300,
+                    height: 300,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.white,
+                        width: 2,
+                      ),
+                      borderRadius: BorderRadius.circular(150),
+                      gradient: LinearGradient(
+                        colors: [
+                          const Color.fromARGB(255, 65, 150, 220),
+                          AppColor.blue,
+                        ],
+                      ),
                     ),
                   ),
+                ),
+              ),
+              Gap(10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
                   Text(
-                    " تسبيح  ${_getDayName(_selectedDate.weekday)}",
+                    totalCounter.toString(),
+                    style: TextStyle(
+                        fontFamily: 'cairo',
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: const Color.fromARGB(255, 72, 172, 253)),
+                  ),
+                  Gap(20),
+                  Text(
+                    "مجموع التسبيحات",
                     style: TextStyle(
                       fontFamily: 'cairoNormal',
                       fontSize: 24,
@@ -159,104 +268,8 @@ class _TasbeehState extends State<Tasbeeh> {
                   ),
                 ],
               ),
-            ),
-            Gap(20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Gap(20),
-                FloatingActionButton(
-                  shape: RoundedRectangleBorder(
-                    // Custom shape
-                    borderRadius: BorderRadius.circular(20), // Rounded edges
-                    side: BorderSide(
-                        color: Colors.white, width: 2), // White border
-                  ),
-                  onPressed: () {
-                    //* reset the counter
-                    setState(() {
-                      _resetCounter();
-                    });
-                  },
-                  child: Icon(Icons.replay, color: Colors.white),
-                  backgroundColor: AppColor.blue,
-                ),
-                Gap(10),
-                Text(
-                  "اعاده",
-                  style: TextStyle(
-                    fontFamily: 'cairo',
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: AppColor.blue,
-                  ),
-                ),
-              ],
-            ),
-            Gap(10),
-            GestureDetector(
-              onTapDown: (_) {
-                setState(() {
-                  _scale = 0.99; // Shrink when pressed
-                });
-              },
-              onTapUp: (_) {
-                setState(() {
-                  _scale = 1.0; // Expand back to normal size
-                  _incrementCounter();
-                });
-              },
-              onTapCancel: () {
-                setState(() {
-                  _scale = 1.0; // Reset if tap is canceled
-                });
-              },
-              child: Transform.scale(
-                scale: _scale,
-                child: Container(
-                  width: 300,
-                  height: 300,
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.white,
-                      width: 2,
-                    ),
-                    borderRadius: BorderRadius.circular(150),
-                    gradient: LinearGradient(
-                      colors: [
-                        const Color.fromARGB(255, 65, 150, 220),
-                        AppColor.blue,
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ),
-            Gap(10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  totalCounter.toString(),
-                  style: TextStyle(
-                      fontFamily: 'cairo',
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: const Color.fromARGB(255, 72, 172, 253)),
-                ),
-                Gap(20),
-                Text(
-                  "مجموع التسبيحات",
-                  style: TextStyle(
-                    fontFamily: 'cairoNormal',
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-              ],
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
