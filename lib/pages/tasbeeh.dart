@@ -152,13 +152,15 @@ class _TasbeehState extends State<Tasbeeh> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    Text(
-                      counter.toString(),
-                      style: TextStyle(
-                        fontFamily: 'cairo',
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
+                    Center(
+                      child: Text(
+                        counter.toString(),
+                        style: TextStyle(
+                          fontFamily: 'cairo',
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
                       ),
                     ),
                     Text(
