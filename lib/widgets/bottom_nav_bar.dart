@@ -20,8 +20,8 @@ class _NavBarWidgetState extends State<NavBarWidget> {
   List<Widget> pages = [
     const HomePage(),
     AzkarHome(),
-    const Center(child: Text("states")),
     Tasbeeh(),
+    const Center(child: Text("صدقه جاريه")),
   ];
 
   @override
@@ -79,19 +79,19 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                       icon: SvgPicture.asset(
                         colorFilter:
                             ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                        AppImages.stateSvg,
+                        AppImages.praySvg,
                         width: 40,
                       ),
-                      label: "Compass",
+                      label: "Profile",
                     ),
                     BottomNavigationBarItem(
                       icon: SvgPicture.asset(
                         colorFilter:
                             ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                        AppImages.praySvg,
+                        AppImages.stateSvg,
                         width: 40,
                       ),
-                      label: "Profile",
+                      label: "Compass",
                     ),
                   ],
                 ),
