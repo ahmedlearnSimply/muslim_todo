@@ -6,6 +6,7 @@ import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
 import 'package:muslim_todp/pages/azkar/azkar_home.dart';
 import 'package:muslim_todp/pages/home_page.dart';
+import 'package:muslim_todp/pages/sadqa.dart';
 import 'package:muslim_todp/pages/tasbeeh.dart';
 
 class NavBarWidget extends StatefulWidget {
@@ -21,7 +22,6 @@ class _NavBarWidgetState extends State<NavBarWidget> {
     const HomePage(),
     AzkarHome(),
     Tasbeeh(),
-    const Center(child: Text("صدقه جاريه")),
   ];
 
   @override
@@ -83,15 +83,6 @@ class _NavBarWidgetState extends State<NavBarWidget> {
                         width: 40,
                       ),
                       label: "Profile",
-                    ),
-                    BottomNavigationBarItem(
-                      icon: SvgPicture.asset(
-                        colorFilter:
-                            ColorFilter.mode(Colors.white, BlendMode.srcIn),
-                        AppImages.stateSvg,
-                        width: 40,
-                      ),
-                      label: "Compass",
                     ),
                   ],
                 ),
