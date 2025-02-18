@@ -140,7 +140,7 @@ class _TasbeehState extends State<Tasbeeh> {
             children: [
               Gap(20),
               Container(
-                height: 60,
+                height: 80,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.transparent,

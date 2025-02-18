@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:muslim_todp/core/assets/app_images.dart';
 import 'package:muslim_todp/core/colors/app_color.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Rokae extends StatefulWidget {
@@ -200,7 +201,7 @@ class CounterScreen extends StatelessWidget {
                     //* share function
                     GestureDetector(
                       onTap: () {
-                        // share button
+                        Share.share(text);
                       },
                       child: Row(
                         children: [
@@ -218,7 +219,9 @@ class CounterScreen extends StatelessWidget {
                                 ),
                                 child: Center(
                                   child: IconButton(
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      Share.share(text);
+                                    },
                                     icon: Icon(
                                       Icons.share,
                                       color: Colors.white,
